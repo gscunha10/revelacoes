@@ -44,48 +44,171 @@
             --danger: #ff4757;
             --success: #2ed573;
         }
-        /* Estilos dos botões Cakto */
-cakto-upsell-accept::part(button) {
-    background: linear-gradient(45deg, #2ed573, #7bed9f) !important;
-    color: white !important;
-    padding: 25px 40px !important;
-    font-size: 1.4rem !important;
-    font-weight: 700 !important;
-    border-radius: 50px !important;
-    border: none !important;
-    width: 100% !important;
-    max-width: 500px !important;
-    margin: 15px auto !important;
-    cursor: pointer !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4) !important;
-    transition: all 0.3s ease !important;
-    font-family: 'Montserrat', sans-serif !important;
-}
 
-cakto-upsell-accept::part(button):hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 15px 40px rgba(46, 213, 115, 0.6) !important;
-}
+        /* Modal/Popup Styles */
+        .popup-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .popup-content {
+            background: linear-gradient(135deg, #1e0a29, #2a1b47);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            border: 2px solid var(--accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: popupSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes popupSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .popup-close {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--light);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .popup-close:hover {
+            color: var(--danger);
+        }
+        
+        .popup-warning {
+            background: linear-gradient(45deg, var(--danger), #ff6b7a);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        /* Estilos dos botões Cakto - FORÇADOS */
+        cakto-upsell-accept,
+        cakto-upsell-accept *,
+        cakto-upsell-accept::part(button) {
+            display: block !important;
+            background: linear-gradient(45deg, #2ed573, #7bed9f) !important;
+            color: white !important;
+            padding: 25px 40px !important;
+            font-size: 1.4rem !important;
+            font-weight: 700 !important;
+            border-radius: 50px !important;
+            border: none !important;
+            width: 100% !important;
+            max-width: 500px !important;
+            margin: 15px auto !important;
+            cursor: pointer !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4) !important;
+            transition: all 0.3s ease !important;
+            font-family: 'Montserrat', sans-serif !important;
+            text-align: center !important;
+            text-decoration: none !important;
+            min-height: 70px !important;
+            line-height: 1.2 !important;
+        }
 
-cakto-upsell-reject::part(button) {
-    background: transparent !important;
-    color: rgba(255, 255, 255, 0.6) !important;
-    padding: 15px 30px !important;
-    font-size: 1rem !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    border-radius: 25px !important;
-    margin: 10px auto !important;
-    cursor: pointer !important;
-    text-decoration: underline !important;
-    font-family: 'Montserrat', sans-serif !important;
-}
+        cakto-upsell-accept:hover,
+        cakto-upsell-accept *:hover,
+        cakto-upsell-accept::part(button):hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 15px 40px rgba(46, 213, 115, 0.6) !important;
+            background: linear-gradient(45deg, #7bed9f, #2ed573) !important;
+        }
 
-cakto-upsell-reject::part(button):hover {
-    color: rgba(255, 255, 255, 0.8) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-}
+        cakto-upsell-reject,
+        cakto-upsell-reject *,
+        cakto-upsell-reject::part(button) {
+            display: block !important;
+            background: transparent !important;
+            color: rgba(255, 255, 255, 0.6) !important;
+            padding: 15px 30px !important;
+            font-size: 1rem !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 25px !important;
+            margin: 10px auto !important;
+            cursor: pointer !important;
+            text-decoration: underline !important;
+            font-family: 'Montserrat', sans-serif !important;
+            text-align: center !important;
+            max-width: 350px !important;
+            width: 100% !important;
+            min-height: 50px !important;
+            line-height: 1.2 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        cakto-upsell-reject:hover,
+        cakto-upsell-reject *:hover,
+        cakto-upsell-reject::part(button):hover {
+            color: rgba(255, 255, 255, 0.8) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        /* Força aparência de botão mesmo se o Cakto não carregar */
+        cakto-upsell-accept {
+            display: block;
+            background: linear-gradient(45deg, #2ed573, #7bed9f);
+            color: white;
+            padding: 25px 40px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            width: 100%;
+            max-width: 500px;
+            margin: 15px auto;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            text-decoration: none;
+            min-height: 70px;
+            line-height: 1.2;
+        }
+
+        cakto-upsell-reject {
+            display: block;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            margin: 10px auto;
+            cursor: pointer;
+            text-decoration: underline;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            min-height: 50px;
+            line-height: 1.2;
+            transition: all 0.3s ease;
+        }
         
         * {
             margin: 0;
@@ -481,6 +604,18 @@ cakto-upsell-reject::part(button):hover {
             color: rgba(255, 255, 255, 0.8);
             border-color: rgba(255, 255, 255, 0.5);
         }
+
+        /* Botão de instruções para popup */
+        .popup-instructions {
+            background: rgba(255, 157, 0, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--light);
+        }
         
         @media (max-width: 768px) {
             .container {
@@ -517,6 +652,12 @@ cakto-upsell-reject::part(button):hover {
                 font-size: 1.2rem;
                 padding: 20px 30px;
             }
+
+            .popup-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -524,6 +665,32 @@ cakto-upsell-reject::part(button):hover {
     <!-- BANNER URGÊNCIA -->
     <div class="urgency-banner">
         🚨 OFERTA ESPECIAL: Esta página expira em <span id="timer-banner">14:59</span> minutos!
+    </div>
+    
+    <!-- MODAL POPUP PARA INSTRUÇÕES -->
+    <div id="popupModal" class="popup-modal">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <div class="popup-warning">
+                🚨 POPUP BLOQUEADO PELO NAVEGADOR
+            </div>
+            <h3 style="color: var(--accent); text-align: center; margin-bottom: 20px;">
+                Para finalizar sua compra:
+            </h3>
+            <div style="text-align: left; padding: 0 20px;">
+                <p style="margin-bottom: 15px;"><strong>1.</strong> Permita popups neste site</p>
+                <p style="margin-bottom: 15px;"><strong>2.</strong> Ou clique no ícone de popup bloqueado na barra de endereços</p>
+                <p style="margin-bottom: 15px;"><strong>3.</strong> Depois clique novamente no botão de compra</p>
+            </div>
+            <div style="text-align: center; margin-top: 25px;">
+                <button onclick="tryOpenCheckout()" class="btn-accept" style="max-width: none; margin: 10px 0;">
+                    TENTAR NOVAMENTE
+                </button>
+                <button onclick="closePopup()" class="btn-reject" style="max-width: none;">
+                    Fechar
+                </button>
+            </div>
+        </div>
     </div>
     
     <div class="container">
@@ -658,51 +825,92 @@ cakto-upsell-reject::part(button):hover {
                 🛡️ GARANTIA TOTAL DE 30 DIAS<br>
                 Se você não sentir mudanças positivas, devolvemos 100% do seu dinheiro!
             </div>
-            
+
             <!-- CTA BUTTONS -->
-            <!-- CTA BUTTONS -->
-<div class="cta-section">
-    <h3 style="color: var(--accent); margin-bottom: 30px; font-size: 1.8rem;">
-        🚨 Esta é Sua ÚLTIMA CHANCE de Garantir Este Preço!
-    </h3>
-    
-    <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--light);">
-        As cartas mostraram seu potencial...<br>
-        Agora <strong style="color: var(--accent);">DESBLOQUEIE</strong> ele completamente!
-    </p>
-    
-    <!-- BOTÕES CAKTO ORIGINAIS -->
-    <div>
-        <meta charset="UTF-8">
-        <cakto-upsell-buttons>
-            <cakto-upsell-accept
-                bg-color="#2ed573"
-                text-color="#ffffff"
-                upsell-accept-url="https://www.revelacoes.online/Obrigado.html"
-                offer-id="nedqpnk"
-                app-base-url="https://app.cakto.com.br"
-                offer-type="upsell"
-                upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
-            >
-                🧠 SIM! QUERO REPROGRAMAR MINHA MENTE - R$19,90
-            </cakto-upsell-accept>
-            <cakto-upsell-reject
-                upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
-            >
-                Não, quero continuar com as mesmas limitações
-            </cakto-upsell-reject>
-        </cakto-upsell-buttons>
-    </div>
-    
-    <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.8;">
-        🔒 Pagamento 100% seguro • Acesso imediato após confirmação
-    </p>
-</div>
+            <div class="cta-section">
+                <h3 style="color: var(--accent); margin-bottom: 30px; font-size: 1.8rem;">
+                    🚨 Esta é Sua ÚLTIMA CHANCE de Garantir Este Preço!
+                </h3>
+                
+                <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--light);">
+                    As cartas mostraram seu potencial...<br>
+                    Agora <strong style="color: var(--accent);">DESBLOQUEIE</strong> ele completamente!
+                </p>
+                
+                <!-- BOTÕES CAKTO ORIGINAIS -->
+                <div id="cakto-buttons-container">
+                    <cakto-upsell-buttons>
+                        <cakto-upsell-accept
+                            bg-color="#2ed573"
+                            text-color="#ffffff"
+                            upsell-accept-url="https://www.revelacoes.online/Obrigado.html"
+                            offer-id="nedqpnk"
+                            app-base-url="https://app.cakto.com.br"
+                            offer-type="upsell"
+                            upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
+                        >
+                            🧠 SIM! QUERO REPROGRAMAR MINHA MENTE - R$19,90
+                        </cakto-upsell-accept>
+                        <cakto-upsell-reject
+                            upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
+                        >
+                            Não, quero continuar com as mesmas limitações
+                        </cakto-upsell-reject>
+                    </cakto-upsell-buttons>
+                </div>
+                
+                <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.8;">
+                    🔒 Pagamento 100% seguro • Acesso imediato após confirmação
+                </p>
+            </div>
             
         </div>
     </div>
 
     <script>
+        // Variáveis globais
+        let checkoutUrl = 'https://app.cakto.com.br/checkout/nedqpnk'; // URL do checkout Cakto
+        let popupWindow = null;
+
+        // Mostrar modal de instruções
+        function showPopupModal() {
+            document.getElementById('popupModal').style.display = 'block';
+            
+            // Tracking do popup bloqueado
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'PopupBlocked', {
+                    content_name: 'Upsell Reprogramacao Neural'
+                });
+            }
+        }
+
+        // Fechar modal
+        function closePopup() {
+            document.getElementById('popupModal').style.display = 'none';
+        }
+
+        // Tentar abrir checkout novamente
+        function tryOpenCheckout() {
+            popupWindow = window.open(checkoutUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+            
+            if (!popupWindow || popupWindow.closed) {
+                // Se ainda estiver bloqueado, redirecionar na mesma janela
+                setTimeout(() => {
+                    window.location.href = checkoutUrl;
+                }, 1000);
+            } else {
+                closePopup();
+            }
+        }
+
+        // Fechar modal quando clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('popupModal');
+            if (event.target == modal) {
+                closePopup();
+            }
+        }
+
         // Timer da página
         let minutes = 14;
         let seconds = 59;
@@ -762,7 +970,63 @@ cakto-upsell-reject::part(button):hover {
             
             console.log('🧠 Página de upsell carregada com sucesso!');
         });
+
+        // Aguardar o carregamento do script Cakto antes de adicionar listeners
+        function initCaktoListeners() {
+            // Aguardar alguns segundos para o Cakto carregar completamente
+            setTimeout(() => {
+                try {
+                    const caktoAccept = document.querySelector('cakto-upsell-accept');
+                    if (caktoAccept) {
+                        caktoAccept.addEventListener('click', function(e) {
+                            console.log('Botão Cakto clicado');
+                            
+                            // Aguardar tentativa de popup do Cakto
+                            setTimeout(() => {
+                                // Verificar se o popup foi bloqueado fazendo um teste discreto
+                                try {
+                                    const testPopup = window.open('', '_blank', 'width=1,height=1');
+                                    if (!testPopup || testPopup.closed) {
+                                        console.log('Popup bloqueado detectado');
+                                        showPopupModal();
+                                    } else {
+                                        testPopup.close();
+                                        console.log('Popup funcionando normalmente');
+                                    }
+                                } catch (error) {
+                                    console.log('Erro ao testar popup:', error);
+                                    showPopupModal();
+                                }
+                            }, 1500);
+                        });
+                        console.log('Listener adicionado ao botão Cakto');
+                    } else {
+                        console.log('Botão Cakto não encontrado, tentando novamente...');
+                        // Tentar novamente após mais tempo
+                        setTimeout(initCaktoListeners, 2000);
+                    }
+                } catch (error) {
+                    console.log('Erro ao inicializar listeners:', error);
+                }
+            }, 3000);
+        }
+
+        // Iniciar listeners após carregamento da página
+        window.addEventListener('load', initCaktoListeners);
+
+        // Detectar popup bloqueado
+        function detectPopupBlocker() {
+            const popup = window.open('', '_blank', 'width=1,height=1,left=0,top=0');
+            if (!popup || popup.closed || popup.outerHeight === 0) {
+                return true; // Popup bloqueado
+            } else {
+                popup.close();
+                return false; // Popup permitido
+            }
+        }
     </script>
+    
+    <!-- Script do Cakto - CARREGADO PRIMEIRO -->
     <script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
 </body>
 </html>
