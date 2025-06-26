@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠 Reprogramação Neural 360° - Oferta Especial</title>
+    
+    <!-- Facebook Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2180655539030241');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', {content_name: 'Upsell Reprogramacao Neural'});
+    </script>
+    
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "nrs5x4z3vz");
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #7c2a90;
+            --primary-dark: #572066;
+            --secondary: #3e1b47;
+            --accent: #ff9d00;
+            --light: #f8f3ff;
+            --dark: #1e0a29;
+            --gradient: linear-gradient(135deg, #7c2a90, #2a1b47);
+            --gold: #ffd700;
+            --danger: #ff4757;
+            --success: #2ed573;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(124, 42, 144, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 85% 30%, rgba(76, 0, 112, 0.15) 0%, transparent 30%);
+            background-attachment: fixed;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .urgency-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, var(--danger), #ff6b7a);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-weight: 700;
+            z-index: 1000;
+            animation: pulse-banner 1.5s infinite;
+            font-size: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        @keyframes pulse-banner {
+            0% { opacity: 0.9; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+            100% { opacity: 0.9; transform: scale(1); }
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 60px auto 0;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .upsell-card {
+            background: rgba(30, 10, 41, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
+                        0 0 20px rgba(124, 42, 144, 0.4);
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(124, 42, 144, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: card-glow 4s infinite alternate;
+        }
+        
+        @keyframes card-glow {
+            0% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(124, 42, 144, 0.4); }
+            100% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 157, 0, 0.6); }
+        }
+        
+        .stop-alert {
+            background: linear-gradient(45deg, var(--danger), #ff6b7a);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            animation: stop-pulse 1s infinite alternate;
+            box-shadow: 0 10px 30px rgba(255, 71, 87, 0.5);
+        }
+        
+        @keyframes stop-pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent), #f8f3ff, #ff6b7a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: title-glow 3s infinite alternate;
+        }
+        
+        @keyframes title-glow {
+            0% { filter: drop-shadow(0 0 5px rgba(255, 157, 0, 0.5)); }
+            100% { filter: drop-shadow(0 0 20px rgba(255, 157, 0, 0.9)); }
+        }
+        
+        .subtitle {
+            font-size: 1.6rem;
+            color: var(--accent);
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+        
+        .problem-section {
+            background: rgba(255, 71, 87, 0.1);
+            border: 2px solid var(--danger);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            animation: problem-glow 3s infinite alternate;
+        }
+        
+        @keyframes problem-glow {
+            0% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(255, 71, 87, 0.6); }
+        }
+        
+        .problem-section h3 {
+            color: var(--danger);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .problem-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .problem-list li {
+            padding: 10px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 1.1rem;
+            color: var(--light);
+        }
+        
+        .problem-list li::before {
+            content: '❌';
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .solution-section {
+            background: rgba(46, 213, 115, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            animation: solution-glow 3s infinite alternate;
+        }
+        
+        @keyframes solution-glow {
+            0% { box-shadow: 0 0 10px rgba(46, 213, 115, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(46, 213, 115, 0.6); }
+        }
+        
+        .solution-section h3 {
+            color: var(--success);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .benefits-list li {
+            padding: 12px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 1.1rem;
+            color: var(--light);
+        }
+        
+        .benefits-list li::before {
+            content: '✅';
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .product-showcase {
+            background: linear-gradient(135deg, rgba(255, 157, 0, 0.15), rgba(124, 42, 144, 0.15));
+            border: 3px solid var(--accent);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .product-showcase h3 {
+            color: var(--gold);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .audio-list {
+            text-align: left;
+            margin: 30px 0;
+        }
+        
+        .audio-item {
+            background: rgba(30, 10, 41, 0.5);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .audio-item h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .price-section {
+            background: var(--gradient);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(124, 42, 144, 0.4);
+        }
+        
+        .price-comparison {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .old-price {
+            font-size: 2rem;
+            text-decoration: line-through;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .new-price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+        
+        .discount-badge {
+            background: var(--danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            animation: badge-pulse 2s infinite;
+        }
+        
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .countdown-section {
+            background: linear-gradient(45deg, var(--danger), #ff6b7a);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            animation: countdown-urgency 1s infinite alternate;
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.5);
+        }
+        
+        @keyframes countdown-urgency {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+        
+        .countdown-display {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .testimonials {
+            margin: 40px 0;
+        }
+        
+        .testimonial {
+            background: rgba(30, 10, 41, 0.7);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 4px solid var(--success);
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            color: var(--success);
+            font-weight: 700;
+            margin-top: 15px;
+            text-align: right;
+        }
+        
+        .guarantee {
+            background: var(--success);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(46, 213, 115, 0.4);
+            animation: guarantee-pulse 3s infinite alternate;
+        }
+        
+        @keyframes guarantee-pulse {
+            0% { box-shadow: 0 5px 20px rgba(46, 213, 115, 0.4); }
+            100% { box-shadow: 0 5px 30px rgba(46, 213, 115, 0.7); }
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        /* Estilos dos botões Cakto */
+        cakto-upsell-accept::part(button) {
+            background: linear-gradient(45deg, var(--success), #7bed9f) !important;
+            color: white !important;
+            padding: 25px 40px !important;
+            font-size: 1.4rem !important;
+            font-weight: 700 !important;
+            border-radius: 50px !important;
+            border: none !important;
+            width: 100% !important;
+            max-width: 500px !important;
+            margin: 15px 0 !important;
+            cursor: pointer !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        cakto-upsell-accept::part(button):hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 15px 40px rgba(46, 213, 115, 0.6) !important;
+        }
+        
+        cakto-upsell-reject::part(button) {
+            background: transparent !important;
+            color: rgba(255, 255, 255, 0.6) !important;
+            padding: 15px 30px !important;
+            font-size: 1rem !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 25px !important;
+            margin: 10px 0 !important;
+            cursor: pointer !important;
+            text-decoration: underline !important;
+        }
+        
+        cakto-upsell-reject::part(button):hover {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin-top: 50px;
+            }
+            
+            .upsell-card {
+                padding: 25px 20px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .new-price {
+                font-size: 2.8rem;
+            }
+            
+            .price-comparison {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .countdown-display {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BANNER URGÊNCIA -->
+    <div class="urgency-banner">
+        🚨 OFERTA ESPECIAL: Esta página expira em <span id="timer-banner">14:59</span> minutos!
+    </div>
+    
+    <div class="container">
+        <div class="upsell-card">
+            
+            <!-- STOP ALERT -->
+            <div class="stop-alert">
+                🚨 PARE! Oferta Especial Só Para Você! 🚨
+            </div>
+            
+            <!-- HEADLINE -->
+            <h1>🧠 Reprogramação Neural 360°</h1>
+            <p class="subtitle">Os áudios que reprogramam seu subconsciente para o SUCESSO TOTAL em todas as áreas da vida</p>
+            
+            <!-- PROBLEMA -->
+            <div class="problem-section">
+                <h3>⚠️ O Que Pode Estar BLOQUEANDO Seu Sucesso</h3>
+                <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem;">
+                    As cartas revelaram seu potencial, mas programações limitantes no seu subconsciente podem estar sabotando tudo...
+                </p>
+                <ul class="problem-list">
+                    <li>"Eu não mereço ser rico(a)"</li>
+                    <li>"Amor verdadeiro não existe para mim"</li>
+                    <li>"Eu nunca vou conseguir"</li>
+                    <li>"Não tenho sorte na vida"</li>
+                    <li>"Dinheiro é difícil de conseguir"</li>
+                    <li>"Eu sempre me saboto quando as coisas vão bem"</li>
+                </ul>
+            </div>
+            
+            <!-- SOLUÇÃO -->
+            <div class="solution-section">
+                <h3>🧠 A Solução: Reprogramação Neural Por Áudio</h3>
+                <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem;">
+                    Enquanto você relaxa (ou até dorme), frequências especiais penetram no seu subconsciente e APAGAM as crenças limitantes!
+                </p>
+                <ul class="benefits-list">
+                    <li>Elimina bloqueios financeiros profundos</li>
+                    <li>Instala mentalidade milionária automaticamente</li>
+                    <li>Remove traumas amorosos do passado</li>
+                    <li>Programa você para atrair amor verdadeiro</li>
+                    <li>Destrói padrões de autossabotagem</li>
+                    <li>Eleva sua energia e vitalidade</li>
+                    <li>Libera seu potencial máximo de sucesso</li>
+                </ul>
+            </div>
+            
+            <!-- PRODUTO -->
+            <div class="product-showcase">
+                <h3>🎧 O Que Você Vai Receber</h3>
+                
+                <div class="audio-list">
+                    <div class="audio-item">
+                        <h4>🎧 ÁUDIO 1: "Desbloqueio Financeiro Total" (30 minutos)</h4>
+                        <p>• Frequências 528Hz para abundância<br>
+                        • Afirmações subliminares para riqueza<br>
+                        • Reprogramação para mentalidade próspera<br>
+                        • Eliminação de bloqueios ancestrais com dinheiro</p>
+                    </div>
+                    
+                    <div class="audio-item">
+                        <h4>🎧 ÁUDIO 2: "Ativação do Amor Verdadeiro" (25 minutos)</h4>
+                        <p>• Frequências 639Hz para relacionamentos<br>
+                        • Cura profunda de traumas amorosos<br>
+                        • Programação para magnetizar alma gêmea<br>
+                        • Elevação da autoestima romântica</p>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 215, 0, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0; border: 2px solid var(--gold);">
+                    <h4 style="color: var(--gold); margin-bottom: 15px;">🎁 BÔNUS EXCLUSIVO:</h4>
+                    <p><strong>Manual de Uso Completo (PDF)</strong><br>
+                    • Quando e como usar os áudios<br>
+                    • Potencializadores dos resultados<br>
+                    • Cronograma de 21 dias para transformação total</p>
+                </div>
+            </div>
+            
+            <!-- DEPOIMENTOS -->
+            <div class="testimonials">
+                <h3 style="text-align: center; color: var(--accent); margin-bottom: 30px;">💬 Resultados Reais de Quem Já Transformou a Vida</h3>
+                
+                <div class="testimonial">
+                    <p>"Em 15 dias ouvindo os áudios, recebi uma proposta de emprego incrível que triplicou minha renda! Não é coincidência, é reprogramação mental funcionando."</p>
+                    <p class="testimonial-author">- Ana M., empresária</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"Conheci meu atual marido exatamente 3 semanas depois de começar a usar o áudio do amor. Depois de anos solteira, finalmente encontrei minha alma gêmea!"</p>
+                    <p class="testimonial-author">- Carla S., psicóloga</p>
+                </div>
+                
+                <div class="testimonial">
+                    <p>"Meu faturamento dobrou em 2 meses! As oportunidades começaram a aparecer 'do nada'. Minha mente realmente foi reprogramada para o sucesso."</p>
+                    <p class="testimonial-author">- João P., empreendedor</p>
+                </div>
+            </div>
+            
+            <!-- URGÊNCIA -->
+            <div class="countdown-section">
+                <h3 style="margin-bottom: 15px;">⏰ ESTA OFERTA EXPIRA EM:</h3>
+                <div class="countdown-display" id="countdown-final">14:59</div>
+                <p><strong>Depois disso, o preço volta para R$97,90!</strong></p>
+            </div>
+            
+            <!-- PREÇO -->
+            <div class="price-section">
+                <h3 style="color: white; font-size: 1.8rem; margin-bottom: 25px;">💰 Investimento para Transformar Sua Vida</h3>
+                
+                <div class="price-comparison">
+                    <div>
+                        <div class="old-price">R$97,90</div>
+                        <small style="opacity: 0.7;">Valor normal</small>
+                    </div>
+                    <div>
+                        <div class="discount-badge">79% OFF</div>
+                        <small>Apenas hoje</small>
+                    </div>
+                    <div>
+                        <div class="new-price">R$19,90</div>
+                        <small style="color: var(--gold);">Oferta especial</small>
+                    </div>
+                </div>
+                
+                <p style="font-size: 1.1rem; margin: 20px 0;">
+                    <strong>Menos que o preço de uma pizza para reprogramar sua mente para o sucesso!</strong>
+                </p>
+            </div>
+            
+            <!-- GARANTIA -->
+            <div class="guarantee">
+                🛡️ GARANTIA TOTAL DE 30 DIAS<br>
+                Se você não sentir mudanças positivas, devolvemos 100% do seu dinheiro!
+            </div>
+            
+            <!-- CTA BUTTONS -->
+            <div class="cta-section">
+                <h3 style="color: var(--accent); margin-bottom: 30px; font-size: 1.8rem;">
+                    🚨 Esta é Sua ÚLTIMA CHANCE de Garantir Este Preço!
+                </h3>
+                
+                <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--light);">
+                    As cartas mostraram seu potencial...<br>
+                    Agora <strong style="color: var(--accent);">DESBLOQUEIE</strong> ele completamente!
+                </p>
+                
+               <div>
+    <meta charset="UTF-8">
+    <cakto-upsell-buttons>
+        <cakto-upsell-accept
+            bg-color="#0f7865"
+            text-color="#ffffff"
+            upsell-accept-url="https://www.revelacoes.online/Obrigado.html"
+            offer-id="nedqpnk"
+            app-base-url="https://app.cakto.com.br"
+            offer-type="upsell"
+            upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
+            target="_self"
+        >
+            🧠 SIM! QUERO REPROGRAMAR MINHA MENTE - R$19,90
+        </cakto-upsell-accept>
+        <cakto-upsell-reject
+            upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
+            target="_self"
+        >
+            Não, quero continuar com as mesmas limitações
+        </cakto-upsell-reject>
+    </cakto-upsell-buttons>
+</div>
+                
+                <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.8;">
+                    🔒 Pagamento 100% seguro • Acesso imediato após confirmação
+                </p>
+            </div>
+            
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
+    
+    <script>
+        // Timer da página
+        let minutes = 14;
+        let seconds = 59;
+        
+        function updateTimer() {
+            if (seconds > 0) {
+                seconds--;
+            } else if (minutes > 0) {
+                minutes--;
+                seconds = 59;
+            } else {
+                // Timer zerou, redirecionar
+                window.location.href = 'https://www.revelacoes.online/Obrigado.html';
+                return;
+            }
+            
+            const timerBanner = document.getElementById('timer-banner');
+            const timerFinal = document.getElementById('countdown-final');
+            
+            const timeString = minutes + ':' + seconds.toString().padStart(2, '0');
+            
+            if (timerBanner) timerBanner.textContent = timeString;
+            if (timerFinal) timerFinal.textContent = timeString;
+            
+            // Efeito de urgência nos últimos 5 minutos
+            if (minutes < 5) {
+                if (timerFinal) {
+                    timerFinal.style.animation = 'urgent-blink 0.5s infinite alternate';
+                    timerFinal.style.color = '#ff4757';
+                }
+            }
+        }
+        
+        // Atualizar timer a cada segundo
+        setInterval(updateTimer, 1000);
+        
+        // Tracking de eventos
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track page view
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'ViewContent', {
+                    content_name: 'Upsell Reprogramacao Neural 360',
+                    value: 19.90,
+                    currency: 'BRL'
+                });
+            }
+            
+            console.log('🧠 Página de upsell carregada com sucesso!');
+        });
+    </script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Aguardar o carregamento dos componentes Cakto
+    setTimeout(function() {
+        const acceptButton = document.querySelector('cakto-upsell-accept');
+        const rejectButton = document.querySelector('cakto-upsell-reject');
+        
+        if (acceptButton) {
+            acceptButton.addEventListener('click', function(e) {
+                // Garantir que não abre popup
+                e.preventDefault();
+                window.location.href = this.getAttribute('upsell-accept-url') || 'https://www.revelacoes.online/Obrigado.html';
+            });
+        }
+        
+        if (rejectButton) {
+            rejectButton.addEventListener('click', function(e) {
+                // Garantir que não abre popup
+                e.preventDefault();
+                window.location.href = this.getAttribute('upsell-reject-url') || 'https://www.revelacoes.online/Obrigado.html';
+            });
+        }
+    }, 1000);
+});
+</body>
+</html>
