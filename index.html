@@ -29,6 +29,76 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=591287220323416&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+
+<!-- Proteção Anti-Bot -->
+<script>
+// Sistema de proteção anti-bot
+window.botProtection = {
+    isBot: false,
+    eventsTracked: new Set(),
+    startTime: Date.now(),
+    
+    detectBot: function() {
+        // Detecta se é bot baseado em comportamento
+        const userAgent = navigator.userAgent.toLowerCase();
+        const botPatterns = [
+            'googlebot', 'bingbot', 'slurp', 'duckduckbot', 'baiduspider',
+            'yandexbot', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
+            'whatsapp', 'telegram', 'crawler', 'spider', 'scraper'
+        ];
+        
+        // Verifica user agent
+        if (botPatterns.some(pattern => userAgent.includes(pattern))) {
+            this.isBot = true;
+            return true;
+        }
+        
+        // Verifica se tem webdriver (automação)
+        if (navigator.webdriver) {
+            this.isBot = true;
+            return true;
+        }
+        
+        // Verifica propriedades suspeitas
+        if (window.phantom || window._phantom || window.callPhantom) {
+            this.isBot = true;
+            return true;
+        }
+        
+        // Verifica se é headless
+        if (navigator.plugins.length === 0) {
+            this.isBot = true;
+            return true;
+        }
+        
+        return false;
+    },
+    
+    trackEvent: function(eventName, parameters = {}) {
+        // Só dispara se não for bot e não foi disparado antes
+        if (this.isBot || this.eventsTracked.has(eventName)) {
+            return false;
+        }
+        
+        // Verifica tempo mínimo na página (anti-bot rápido)
+        if (Date.now() - this.startTime < 3000) {
+            return false;
+        }
+        
+        this.eventsTracked.add(eventName);
+        
+        if (typeof fbq !== 'undefined') {
+            fbq('track', eventName, parameters);
+        }
+        
+        return true;
+    }
+};
+
+// Inicializa proteção
+window.botProtection.detectBot();
+</script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
         
@@ -723,101 +793,22 @@ src="https://www.facebook.com/tr?id=591287220323416&ev=PageView&noscript=1"
                 
                 <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
                     CONTINUAR REVELAÇÃO
-                </a>
-            </div>
-
-            <!-- ETAPA 5: PERGUNTA 2 -->
-            <div class="step" id="step5">
-                <div class="progress-container">
-                    <div class="progress-bar" style="width: 70%;"></div>
-                </div>
-                
-                <div class="question-title">Nos seus sonhos ou momentos de silêncio, que mensagens você tem recebido?</div>
-                
-                <div class="option-group">
-                    <div class="option" data-value="mudanca">🦋 Que é hora de uma grande mudança</div>
-                    <div class="option" data-value="paciencia">⏰ Que preciso ter paciência, minha hora chegará</div>
-                    <div class="option" data-value="coragem">🔥 Que preciso ter mais coragem para algo</div>
-                    <div class="option" data-value="amor">💕 Relacionadas ao amor e relacionamentos</div>
-                </div>
-                
-                <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
-                    CONTINUAR REVELAÇÃO
-                </a>
-            </div>
-
-            <!-- ETAPA 6: PERGUNTA 3 -->
-            <div class="step" id="step6">
-                <div class="progress-container">
-                    <div class="progress-bar" style="width: 80%;"></div>
-                </div>
-                
-                <div class="question-title">Qual situação em sua vida mais precisa de esclarecimento AGORA?</div>
-                
-                <div class="option-group">
-                    <div class="option" data-value="decisao">🤔 Uma decisão importante que preciso tomar</div>
-                    <div class="option" data-value="bloqueio">🚧 Um bloqueio que não consigo superar</div>
-                    <div class="option" data-value="relacionamento">💔 Uma situação amorosa complicada</div>
-                    <div class="option" data-value="proposito">🎯 Descobrir meu verdadeiro propósito</div>
-                </div>
-                
-                <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
-                    CONTINUAR REVELAÇÃO
-                </a>
-            </div>
-
-            <!-- ETAPA 7: PERGUNTA 4 -->
-            <div class="step" id="step7">
-                <div class="progress-container">
-                    <div class="progress-bar" style="width: 85%;"></div>
-                </div>
-                
-                <div class="question-title">Que número ou símbolo tem aparecido frequentemente em sua vida?</div>
-                
-                <div class="option-group">
-                    <div class="option" data-value="numeros">🔢 Números repetidos (11:11, 222, 333)</div>
-                    <div class="option" data-value="animais">🦉 Animais específicos (borboletas, corujas)</div>
-                    <div class="option" data-value="objetos">⭐ Objetos ou formas (estrelas, círculos)</div>
-                    <div class="option" data-value="nenhum">❓ Não tenho notado nada específico</div>
-                </div>
-                
-                <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
-                    CONTINUAR REVELAÇÃO
-                </a>
-            </div>
-
-            <!-- ETAPA 8: PERGUNTA 5 -->
-            <div class="step" id="step8">
-                <div class="progress-container">
-                    <div class="progress-bar" style="width: 90%;"></div>
-                </div>
-                
-                <div class="question-title">Como você se sente em relação ao seu futuro próximo?</div>
-                <div class="option-group">
-                   <div class="option" data-value="otimista">🌟 Otimista, sinto que coisas boas vêm aí</div>
-                   <div class="option" data-value="nervoso">😰 Nervoso(a), muitas incertezas</div>
-                   <div class="option" data-value="curioso">🔮 Curioso(a) para saber o que me espera</div>
-                   <div class="option" data-value="preparado">💪 Preparado(a) para qualquer desafio</div>
-               </div>
-               
-               <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
-                   CONTINUAR REVELAÇÃO
-               </a>
+                    </a>
            </div>
 
-           <!-- ETAPA 9: PERGUNTA 6 -->
-           <div class="step" id="step9">
+           <!-- ETAPA 5: PERGUNTA 2 -->
+           <div class="step" id="step5">
                <div class="progress-container">
-                   <div class="progress-bar" style="width: 95%;"></div>
+                   <div class="progress-bar" style="width: 70%;"></div>
                </div>
                
-               <div class="question-title">Qual dessas frases ressoa mais com sua alma neste momento?</div>
+               <div class="question-title">Nos seus sonhos ou momentos de silêncio, que mensagens você tem recebido?</div>
                
                <div class="option-group">
-                   <div class="option" data-value="transformacao">"Estou pronto(a) para me transformar"</div>
-                   <div class="option" data-value="amor">"Mereço receber amor verdadeiro"</div>
-                   <div class="option" data-value="abundancia">"Estou aberto(a) para a abundância"</div>
-                   <div class="option" data-value="proposito">"Quero descobrir minha missão de vida"</div>
+                   <div class="option" data-value="mudanca">🦋 Que é hora de uma grande mudança</div>
+                   <div class="option" data-value="paciencia">⏰ Que preciso ter paciência, minha hora chegará</div>
+                   <div class="option" data-value="coragem">🔥 Que preciso ter mais coragem para algo</div>
+                   <div class="option" data-value="amor">💕 Relacionadas ao amor e relacionamentos</div>
                </div>
                
                <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
@@ -825,749 +816,937 @@ src="https://www.facebook.com/tr?id=591287220323416&ev=PageView&noscript=1"
                </a>
            </div>
 
-           <!-- ETAPA 10: LOADING -->
-           <div class="step" id="step10">
+           <!-- ETAPA 6: PERGUNTA 3 -->
+           <div class="step" id="step6">
                <div class="progress-container">
-                   <div class="progress-bar" style="width: 100%;"></div>
+                   <div class="progress-bar" style="width: 80%;"></div>
                </div>
                
-               <div class="cosmic-loader">
-                   <div class="cosmic-circle"></div>
-                   
-                   <div class="loading-text" id="loading-message">
-                       🔮 Analisando suas respostas<span class="loading-dots"></span>
-                   </div>
-                   
-                   <p style="text-align: center; margin-top: 30px; color: var(--accent);">
-                       <strong>Preparando sua revelação personalizada...</strong>
-                   </p>
-               </div>
-           </div>
-
-           <!-- ETAPA 11: RESULTADO PERSONALIZADO -->
-           <div class="step" id="step11">
-               <div class="question-title" id="personalized-title">🔮 Sua Revelação Está Pronta!</div>
+               <div class="question-title">Qual situação em sua vida mais precisa de esclarecimento AGORA?</div>
                
-               <div class="social-proof" style="margin: 30px 0;">
-                   <h3 style="color: var(--accent); margin-bottom: 20px;" id="personal-message">
-                       ✨ Mensagem será inserida aqui
-                   </h3>
-                   <p style="font-size: 1.1rem; line-height: 1.6;" id="preview-reading">
-                       Conteúdo da prévia será inserido aqui...
-                   </p>
+               <div class="option-group">
+                   <div class="option" data-value="decisao">🤔 Uma decisão importante que preciso tomar</div>
+                   <div class="option" data-value="bloqueio">🚧 Um bloqueio que não consigo superar</div>
+                   <div class="option" data-value="relacionamento">💔 Uma situação amorosa complicada</div>
+                   <div class="option" data-value="proposito">🎯 Descobrir meu verdadeiro propósito</div>
                </div>
                
-               <!-- URGÊNCIA FINAL -->
-               <div class="scarcity-bomb">
-                   <div class="scarcity-title">⚠ OFERTA ESPECIAL</div>
-                   <div class="countdown-display" id="countdown-final">05:00</div>
-                   <p><strong>Desconto expira em 5 minutos!</strong></p>
-               </div>
-               
-               <div class="pricing-section">
-                   <h3 style="color: var(--accent); margin-bottom: 20px;">💰 Revelação Completa</h3>
-                   
-                   <div class="price-comparison">
-                       <div>
-                           <div class="old-price">R$49,90</div>
-                           <small style="opacity: 0.7;">Valor normal</small>
-                       </div>
-                       <div style="text-align: center;">
-                           <div style="color: var(--danger); font-weight: 700; font-size: 1.3rem;">-80% OFF</div>
-                           <small>Apenas hoje</small>
-                       </div>
-                       <div>
-                           <div class="new-price">R$9,90</div>
-                           <small style="color: var(--success);">Oferta especial</small>
-                       </div>
-                   </div>
-                   
-                   <div class="guarantee">
-                       🛡 GARANTIA TOTAL: 100% do dinheiro de volta se não ficar satisfeito
-                   </div>
-                   
-                   <a href="https://pay.cakto.com.br/seu-link-aqui" class="cta-mega" id="payment-btn">
-                       🔮 LIBERAR REVELAÇÃO COMPLETA - R$9,90
-                   </a>
-                   
-                   <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                       🔒 Pagamento 100% seguro • Acesso imediato após confirmação
-                   </p>
-               </div>
-           </div>
-          
-           <!-- ETAPA 12: LEITURA FINAL -->
-           <div class="step" id="step12">
-               <div class="question-title">✨ Sua Leitura Personalizada</div>
-               
-               <div id="reading-content">
-                   <!-- Conteúdo será inserido aqui -->
-               </div>
-               
-               <div class="guarantee">
-                   🌟 Esperamos que esta leitura traga a clareza que sua alma buscava
-               </div>
-               
-               <a href="#" class="cta-mega" onclick="location.reload()">
-                   🔄 FAZER NOVA CONSULTA
+               <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
+                   CONTINUAR REVELAÇÃO
                </a>
            </div>
-       </div>
-   </div>
-   
-   <!-- NOTIFICAÇÃO SOCIAL -->
-   <div class="social-notification" id="social-notification">
-       <p class="notification-text">
-           <span class="notification-name"></span>: 
-           <span class="notification-message"></span>
-       </p>
-       <p class="notification-time"></p>
-   </div>
 
-   <script>
-       // CONFIGURAÇÕES E VARIÁVEIS
-       const tarotCards = [
-           { id: 1, name: "O Louco", image: "https://www.trustedtarot.com/img/cards/the-fool.png" },
-           { id: 2, name: "O Mago", image: "https://www.trustedtarot.com/img/cards/the-magician.png" },
-           { id: 3, name: "A Sacerdotisa", image: "https://www.trustedtarot.com/img/cards/the-high-priestess.png" },
-           { id: 4, name: "A Imperatriz", image: "https://www.trustedtarot.com/img/cards/the-empress.png" },
-           { id: 5, name: "O Imperador", image: "https://www.trustedtarot.com/img/cards/the-emperor.png" },
-           { id: 6, name: "Os Enamorados", image: "https://www.trustedtarot.com/img/cards/the-lovers.png" },
-           { id: 7, name: "O Carro", image: "https://www.trustedtarot.com/img/cards/the-chariot.png" },
-           { id: 8, name: "A Força", image: "https://www.trustedtarot.com/img/cards/strength.png" }
-       ];
-       
-       let currentStep = 1;
-       let selectedCards = [];
-       let userData = {
-           problema: '',
-           area: '',
-           nome: '',
-           energia: '',
-           sonhos: '',
-           situacao: '',
-           simbolos: '',
-           futuro: '',
-           frase: ''
-       };
-       
-       // NOTIFICAÇÕES SOCIAIS
-       const socialMessages = [
-           "Chorei ao ler... muito preciso!",
-           "Incrível como acertou detalhes da minha vida!",
-           "Melhor investimento que fiz!",
-           "As cartas revelaram exatamente o que precisava saber!",
-           "Impressionante a precisão da leitura!",
-           "Mudou minha perspectiva sobre tudo!",
-           "Conseguiu ver coisas que nem eu sabia sobre mim!",
-           "Estou sem palavras... muito real!",
-           "A parte sobre amor foi certeira!",
-           "Finalmente entendi o que estava bloqueando minha vida!"
-       ];
-       
-       const customerNames = [
-           "Maria S.", "Carlos F.", "Ana L.", "João P.", "Juliana R.",
-           "Roberto M.", "Patricia N.", "Gustavo T.", "Fernanda C.", "André L.",
-           "Luiza M.", "Ricardo T.", "Camila D.", "Bruno S.", "Amanda P."
-       ];
-       
-       // TIMERS E CONTADORES
-       let spotsRemaining = 18;
-       let bannerMinutes = 11;
-       let bannerSeconds = 47;
-       let finalMinutes = 5;
-       let finalSeconds = 0;
-       
-       // FUNÇÕES DE TIMER
-       function updateBannerTimer() {
-           if (bannerSeconds > 0) {
-               bannerSeconds--;
-           } else if (bannerMinutes > 0) {
-               bannerMinutes--;
-               bannerSeconds = 59;
-           }
-           
-           const timerElement = document.getElementById('timer-banner');
-           if (timerElement) {
-               timerElement.textContent = bannerMinutes + ':' + bannerSeconds.toString().padStart(2, '0');
-           }
-       }
-       
-       function updateFinalTimer() {
-           if (finalSeconds > 0) {
-               finalSeconds--;
-           } else if (finalMinutes > 0) {
-               finalMinutes--;
-               finalSeconds = 59;
-           }
-           
-           const timerElement = document.getElementById('countdown-final');
-           if (timerElement) {
-               timerElement.textContent = finalMinutes.toString().padStart(2, '0') + ':' + finalSeconds.toString().padStart(2, '0');
+           <!-- ETAPA 7: PERGUNTA 4 -->
+           <div class="step" id="step7">
+               <div class="progress-container">
+                   <div class="progress-bar" style="width: 85%;"></div>
+               </div>
                
-               // Efeito de urgência nos últimos 2 minutos
-               if (finalMinutes < 2) {
-                   timerElement.style.animation = 'urgent-blink 0.5s infinite alternate';
-                   timerElement.style.color = '#ff4757';
-               }
-           }
-       }
-       
-       function updateCountdowns() {
-           const mainCountdown = document.getElementById('countdown-main');
-           if (mainCountdown) {
-               mainCountdown.textContent = bannerMinutes + ':' + bannerSeconds.toString().padStart(2, '0');
-           }
-       }
-       
-       // ESCASSEZ DINÂMICA
-       function updateScarcity() {
-           if (spotsRemaining > 5) {
-               spotsRemaining = Math.max(spotsRemaining - Math.floor(Math.random() * 2), 5);
-               const spotsElement = document.getElementById('spots-remaining');
-               if (spotsElement) {
-                   spotsElement.textContent = spotsRemaining;
-               }
-           }
-       }
-       
-       // NOTIFICAÇÕES SOCIAIS
-       function showSocialNotification() {
-           const notification = document.getElementById('social-notification');
-           const nameElement = notification.querySelector('.notification-name');
-           const messageElement = notification.querySelector('.notification-message');
-           const timeElement = notification.querySelector('.notification-time');
-           
-           const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
-           const randomMessage = socialMessages[Math.floor(Math.random() * socialMessages.length)];
-           const randomMinutes = Math.floor(Math.random() * 45) + 1;
-           
-           nameElement.textContent = randomName;
-           messageElement.textContent = randomMessage;
-           timeElement.textContent = 'há ' + randomMinutes + ' minutos';
-           
-           notification.classList.add('show');
-           
-           setTimeout(() => {
-               notification.classList.remove('show');
-           }, 6000);
-       }
-       
-       // NAVEGAÇÃO ENTRE ETAPAS
-       function goToStep(step) {
-           document.getElementById('step' + currentStep).classList.remove('active');
-           currentStep = step;
-           document.getElementById('step' + currentStep).classList.add('active');
-           
-           // Scroll para o topo
-           window.scrollTo({ top: 0, behavior: 'smooth' });
-           
-           // Ações específicas por etapa
-           if (step === 10) {
-               startLoadingSequence();
-           } else if (step === 11) {
-               generatePersonalizedPreview();
-               startFinalCountdown();
-               setTimeout(() => {
-                   showSocialNotification();
-                   setInterval(showSocialNotification, 15000);
-               }, 3000);
-           }
-       }
-       
-       // SISTEMA DE CARTAS
-       function shuffleArray(array) {
-           const shuffled = [...array];
-           for (let i = shuffled.length - 1; i > 0; i--) {
-               const j = Math.floor(Math.random() * (i + 1));
-               [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-           }
-           return shuffled;
-       }
-       
-       // SEQUÊNCIA DE CARREGAMENTO
-       function startLoadingSequence() {
-           const messages = [
-               '🔮 Analisando suas respostas',
-               '⭐ Consultando os registros akáshicos',
-               '🌟 Decodificando padrões energéticos',
-               '✨ Revelando segredos do seu destino',
-               '🎯 Preparando sua leitura personalizada'
-           ];
-           
-           let messageIndex = 0;
-           const messageElement = document.getElementById('loading-message');
-           
-           const messageInterval = setInterval(() => {
-               messageIndex++;
-               if (messageIndex < messages.length) {
-                   messageElement.innerHTML = messages[messageIndex] + '<span class="loading-dots"></span>';
-               } else {
-                   clearInterval(messageInterval);
-                   setTimeout(() => {
-                       goToStep(11);
-                   }, 2000);
-               }
-           }, 1500);
-       }
-       
-       // TIMER FINAL
-       function startFinalCountdown() {
-           setInterval(updateFinalTimer, 1000);
-       }
-       
-       // GERAÇÃO DE LEITURA
-       function generateReading() {
-           const userName = userData.nome || 'Consulente';
-           
-           const readings = {
-               amor: {
-                   title: '💕 Revelações do Seu Coração',
-                   content: 
-                       '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
-                       '<p>As cartas revelam que você está passando por uma transformação profunda em sua vida amorosa. Sua alma gêmea está mais próxima do que imagina - uma conexão especial surgirá nos próximos 60 dias.</p>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">🌟 Sua Primeira Carta - O Passado</h4>' +
-                           '<p>Existe uma energia do passado que ainda ressoa em seu coração. Não é necessariamente uma pessoa, mas um padrão emocional que você precisa liberar para atrair o amor verdadeiro.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">💫 Sua Segunda Carta - O Presente</h4>' +
-                           '<p>Alguém muito especial já está observando você de longe. Esta pessoa admira sua energia e autenticidade. Se você está solteiro(a), prepare-se para uma surpresa romântica.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">🔮 Sua Terceira Carta - O Futuro</h4>' +
-                           '<p>Um relacionamento baseado em amor verdadeiro e respeito mútuo está se formando. As cartas mostram uma conexão que durará anos e trará a felicidade que você sempre sonhou.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
-                           '<h4 style="color: white; margin-bottom: 15px;">🎯 Orientação Especial</h4>' +
-                           '<p style="color: white; margin: 0;">Para atrair o amor verdadeiro, pratique gratidão diariamente e visualize-se recebendo o amor que merece. O universo está conspirando a seu favor!</p>' +
-                       '</div>'
-               },
-               dinheiro: {
-                   title: '💰 Revelações da Sua Prosperidade',
-                   content: 
-                       '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
-                       '<p>As cartas mostram um período de grande transformação financeira se aproximando. Uma oportunidade de ouro surgirá nos próximos 90 dias que mudará sua situação completamente.</p>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">⚡ Sua Primeira Carta - Talentos Ocultos</h4>' +
-                           '<p>Você possui um dom natural que está sendo completamente subutilizado. Este talento está relacionado à comunicação ou criatividade e pode se tornar uma fonte importante de renda.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">🌊 Sua Segunda Carta - Fluxo Financeiro</h4>' +
-                           '<p>Uma nova fonte de renda está se abrindo, possivelmente relacionada a algo que você considera "apenas um hobby". As cartas mostram prosperidade através da paixão.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">👑 Sua Terceira Carta - Reconhecimento</h4>' +
-                           '<p>Nos próximos 6 meses, você receberá uma proposta ou reconhecimento que validará suas habilidades de forma surpreendente. Sua hora de brilhar chegou!</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
-                           '<h4 style="color: white; margin-bottom: 15px;">🎯 Ritual de Prosperidade</h4>' +
-                           '<p style="color: white; margin: 0;">Escreva suas qualidades profissionais em um papel e leia em voz alta todas as manhãs por 21 dias. Este ritual abrirá portais de abundância!</p>' +
-                       '</div>'
-               },
-               proposito: {
-                   title: '🌟 Revelações do Seu Propósito',
-                   content: 
-                       '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
-                       '<p>As cartas revelam que você está passando por um despertar espiritual acelerado. Sua missão de vida está se tornando mais clara e você será chamado(a) para ajudar outras pessoas.</p>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">🔮 Sua Primeira Carta - Conexões Superiores</h4>' +
-                           '<p>Você possui uma conexão natural com planos superiores que vem se intensificando. Seus guias espirituais tentam se comunicar através de números repetidos e "coincidências".</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">✨ Sua Segunda Carta - Dons Latentes</h4>' +
-                           '<p>As cartas revelam habilidades intuitivas extraordinárias que foram reprimidas na infância. Estes dons estão despertando agora porque chegou sua hora de usá-los.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">🌈 Sua Terceira Carta - Missão Revelada</h4>' +
-                           '<p>Sua missão é ser um catalisador de cura emocional para outras pessoas. Nos próximos meses, pessoas começarão a procurá-lo naturalmente para conselhos e orientação.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
-                           '<h4 style="color: white; margin-bottom: 15px;">🎯 Prática Espiritual</h4>' +
-                           '<p style="color: white; margin: 0;">Dedique 15 minutos diários à meditação silenciosa. Em 30 dias, padrões proféticos se revelarão, confirmando sua conexão especial com o divino.</p>' +
-                       '</div>'
-               },
-               futuro: {
-                   title: '🔮 Visões do Seu Destino',
-                   content: 
-                       '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
-                       '<p>As cartas abrem um portal temporal revelando eventos extraordinários que se aproximam. Seu futuro está repleto de oportunidades e transformações positivas.</p>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">⏰ Próximos 3 Meses</h4>' +
-                           '<p>Uma oportunidade inesperada chegará através de uma pessoa do seu passado ou alguém com características similares. Esta oportunidade mudará sua trajetória de vida.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">🌟 Próximos 6 Meses</h4>' +
-                           '<p>Um período de reconhecimento e colheita dos esforços que você vem plantando. Algo que começou como "teste" se tornará uma fonte de realização e prosperidade.</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
-                           '<h4 style="color: var(--accent);">🦋 Próximo Ano</h4>' +
-                           '<p>Uma transformação completa na sua identidade está programada. Você se tornará uma versão mais autêntica e poderosa de si mesmo(a). Um novo ciclo de vida começa!</p>' +
-                       '</div>' +
-                       
-                       '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
-                           '<h4 style="color: white; margin-bottom: 15px;">🎯 Preparação para o Destino</h4>' +
-                           '<p style="color: white; margin: 0;">Mantenha um diário de manifestações: anote diariamente 3 desejos e 3 gratidões. Revise mensalmente - você ficará impressionado(a) com os resultados!</p>' +
-                       '</div>'
-               }
-           };
-           
-           const selectedReading = readings[userData.area] || readings.futuro;
-           
-           // Adicionar as cartas selecionadas simuladas
-           let cardsHtml = '<div style="display: flex; justify-content: center; gap: 15px; margin: 30px 0; flex-wrap: wrap;">';
-           const randomCards = shuffleArray(tarotCards).slice(0, 3);
-           randomCards.forEach((card, index) => {
-               cardsHtml += 
-                   '<div style="text-align: center;">' +
-                       '<img src="' + card.image + '" alt="' + card.name + '" style="width: 100px; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">' +
-                       '<p style="margin-top: 10px; font-weight: bold; color: var(--accent); font-size: 0.9rem;">' + card.name + '</p>' +
-                   '</div>';
-           });
-           cardsHtml += '</div>';
-           
-           document.getElementById('reading-content').innerHTML = cardsHtml + selectedReading.content;
-       }
-
-       // GERAÇÃO DE PRÉVIA PERSONALIZADA
-       function generatePersonalizedPreview() {
-           const userName = userData.nome || 'Querido(a)';
-           
-           // Título personalizado
-           document.getElementById('personalized-title').textContent = 
-               `🔮 ${userName}, Sua Revelação Está Pronta!`;
-           
-           // Mensagem personalizada baseada nas respostas
-           let personalMessage = `${userName}, baseado em suas respostas, o Universo revelou algo extraordinário sobre seu destino...`;
-           
-           if (userData.energia === 'esperancosa') {
-               personalMessage += " Sua energia positiva está atraindo oportunidades incríveis!";
-           } else if (userData.energia === 'pesada') {
-               personalMessage += " Descobrimos o que está bloqueando sua energia e como liberar!";
-           } else if (userData.energia === 'confusa') {
-               personalMessage += " A clareza que você busca está finalmente chegando!";
-           } else if (userData.energia === 'ansiosa') {
-               personalMessage += " As mudanças que você pressente realmente estão se aproximando!";
-           }
-           
-           document.getElementById('personal-message').textContent = personalMessage;
-           
-         // Prévia da leitura
-            let preview = `As cartas revelaram 3 segredos importantes sobre sua vida:\n\n`;
-         //    preview += `💫 PASSADO: Uma energia do seu passado está influenciando seu presente de forma que você não imagina...\n\n`;
-           //  preview += `⭐ PRESENTE: Alguém muito especial está prestes a entrar em sua vida nos próximos 30 dias...\n\n`;
-           //  preview += `🔮 FUTURO: Uma transformação completa está programada para os próximos 6 meses que mudará tudo...\n\n`;
-           preview += `📖 Para acessar a revelação completa com todos os detalhes, rituais específicos e datas exatas, clique abaixo:`;
-           
-           document.getElementById('preview-reading').innerHTML = preview.replace(/\n/g, '<br>');
-       }
-       
-       // EVENT LISTENERS
-       document.addEventListener('DOMContentLoaded', function() {
-           // Seleção de opções
-           document.addEventListener('click', function(e) {
-               if (e.target.classList.contains('option')) {
-                   const parent = e.target.parentElement;
-                   parent.querySelectorAll('.option').forEach(opt => {
-                       opt.classList.remove('selected');
-                   });
-                   
-                   e.target.classList.add('selected');
-                   
-                   const value = e.target.getAttribute('data-value');
-                   if (currentStep === 1) {
-                       userData.problema = value;
-                       const nextBtn = document.querySelector('#step1 .next-btn');
-                       nextBtn.style.opacity = '1';
-                       nextBtn.style.pointerEvents = 'auto';
-                   } else if (currentStep === 2) {
-                       userData.area = value;
-                   } else if (currentStep === 4) {
-                       userData.energia = value;
-                   } else if (currentStep === 5) {
-                       userData.sonhos = value;
-                   } else if (currentStep === 6) {
-                       userData.situacao = value;
-                   } else if (currentStep === 7) {
-                       userData.simbolos = value;
-                                      } else if (currentStep === 8) {
-                       userData.futuro = value;
-                   } else if (currentStep === 9) {
-                       userData.frase = value;
-                   }
-
-                   // Ativar botão após seleção (exceto step 1 que já tem lógica própria)
-                   if (currentStep > 1) {
-                       const nextBtn = document.querySelector('#step' + currentStep + ' .next-btn');
-                       if (nextBtn) {
-                           nextBtn.style.opacity = '1';
-                           nextBtn.style.pointerEvents = 'auto';
-                       }
-                   }
-               }
-           });
-           
-           // Botões de próximo
-           document.addEventListener('click', function(e) {
-               if (e.target.classList.contains('next-btn')) {
-                   e.preventDefault();
-                   
-                   if (currentStep === 1 && !userData.problema) {
-                       alert('Por favor, escolha uma opção para continuar.');
-                       return;
-                   }
-                   
-                   if (currentStep === 2 && !userData.area) {
-                       alert('Por favor, escolha uma área para continuar.');
-                       return;
-                   }
-                   
-                   if (currentStep === 3) {
-                       const nameInput = document.getElementById('user-name');
-                       if (!nameInput.value.trim()) {
-                           alert('Por favor, digite seu nome para continuar.');
-                           nameInput.focus();
-                           return;
-                       }
-                       userData.nome = nameInput.value.trim();
-                   }
-
-                   if (currentStep === 4 && !userData.energia) {
-                       alert('Por favor, escolha uma opção para continuar.');
-                       return;
-                   }
-
-                   if (currentStep === 5 && !userData.sonhos) {
-                       alert('Por favor, escolha uma opção para continuar.');
-                       return;
-                   }
-
-                   if (currentStep === 6 && !userData.situacao) {
-                       alert('Por favor, escolha uma opção para continuar.');
-                       return;
-                   }
-
-                   if (currentStep === 7 && !userData.simbolos) {
-                       alert('Por favor, escolha uma opção para continuar.');
-                       return;
-                   }
-
-                   if (currentStep === 8 && !userData.futuro) {
-                       alert('Por favor, escolha uma opção para continuar.');
-                       return;
-                   }
-
-                   if (currentStep === 9 && !userData.frase) {
-                       alert('Por favor, escolha uma opção para continuar.');
-                       return;
-                   }
-                   
-                   goToStep(currentStep + 1);
-                   
-                   // Tracking de eventos
-                   if (typeof fbq !== 'undefined') {
-                       fbq('track', 'Lead');
-                       if (currentStep === 3) {
-                           fbq('track', 'CompleteRegistration');
-                       }
-                   }
-               }
-           });
-           
-           // Botão de pagamento
-           document.addEventListener('click', function(e) {
-               if (e.target.id === 'payment-btn') {
-                   e.preventDefault();
-                   
-                   // Tracking
-                   if (typeof fbq !== 'undefined') {
-                       fbq('track', 'InitiateCheckout', {
-                           content_name: 'Leitura Premium de Tarot',
-                           value: 9.90,
-                           currency: 'BRL'
-                       });
-                   }
-                   
-                   // Salvar dados do usuário
-                   localStorage.setItem('tarotUserData', JSON.stringify(userData));
-                   
-                   // Redirecionar para o link de pagamento
-                   // SUBSTITUA pela sua URL de pagamento real:
-                   window.location.href = 'https://pay.cakto.com.br/seu-link-aqui';
-               }
-           });
-           
-           // Input de nome - Enter para continuar
-           document.addEventListener('keypress', function(e) {
-               if (e.key === 'Enter' && e.target.id === 'user-name') {
-                   const nextBtn = document.querySelector('#step3 .next-btn');
-                   if (nextBtn) {
-                       nextBtn.click();
-                   }
-               }
-           });
-           
-           // Verificar se voltou do pagamento com sucesso
-           const urlParams = new URLSearchParams(window.location.search);
-           if (urlParams.get('success') === 'true') {
-               const savedData = localStorage.getItem('tarotUserData');
-               if (savedData) {
-                   userData = JSON.parse(savedData);
-                   generateReading();
-                   goToStep(12);
-                   
-                   if (typeof fbq !== 'undefined') {
-                       fbq('track', 'Purchase', {
-                           content_name: 'Leitura Premium de Tarot',
-                           value: 9.90,
-                           currency: 'BRL'
-                       });
-                   }
-               }
-           }
-           
-           // Iniciar timers
-           setInterval(updateBannerTimer, 1000);
-           setInterval(updateCountdowns, 1000);
-           setInterval(updateScarcity, 45000);
-           
-           // Mostrar primeira notificação social após 10 segundos
-           setTimeout(showSocialNotification, 10000);
-           
-           console.log('🔮 Site Tarot Ultra-Otimizado carregado com sucesso!');
-       });
-       
-       // CSS adicional para animação shake
-       const additionalCSS = 
-           '<style>' +
-           '@keyframes shake {' +
-               '0%, 100% { transform: translateX(0); }' +
-               '10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }' +
-               '20%, 40%, 60%, 80% { transform: translateX(5px); }' +
-           '}' +
-           
-           '.tarot-card {' +
-               'transform-origin: center;' +
-               'will-change: transform;' +
-           '}' +
-           
-           '.loading-dots::after {' +
-               'animation: loading-dots 1.5s infinite;' +
-           '}' +
-           
-           '@keyframes loading-dots {' +
-               '0% { content: ""; }' +
-               '25% { content: "."; }' +
-               '50% { content: ".."; }' +
-               '75% { content: "..."; }' +
-               '100% { content: ""; }' +
-           '}' +
-           
-           '/* Melhorias de performance */' +
-           '.cosmic-circle {' +
-               'transform: translateZ(0);' +
-               'will-change: transform;' +
-           '}' +
-           
-           '.cta-mega {' +
-               'transform: translateZ(0);' +
-               'will-change: transform, box-shadow;' +
-           '}' +
-           
-           '/* Animações mais suaves */' +
-           '.step {' +
-               'will-change: opacity, transform;' +
-           '}' +
-           
-           '.option {' +
-               'will-change: transform, background-color;' +
-           '}' +
-           
-           '/* Melhor responsividade para tablets */' +
-           '@media (max-width: 1024px) and (min-width: 769px) {' +
-               '.cta-mega {' +
-                   'font-size: 1.3rem;' +
-               '}' +
+               <div class="question-title">Que número ou símbolo tem aparecido frequentemente em sua vida?</div>
                
-               '.new-price {' +
-                   'font-size: 2.8rem;' +
-               '}' +
-           '}' +
-           
-           '/* Otimizações para dispositivos com pouca RAM */' +
-           '@media (max-device-width: 768px) and (-webkit-max-device-pixel-ratio: 2) {' +
-               '.cosmic-circle {' +
-                   'animation-duration: 3s;' +
-               '}' +
+               <div class="option-group">
+                   <div class="option" data-value="numeros">🔢 Números repetidos (11:11, 222, 333)</div>
+                   <div class="option" data-value="animais">🦉 Animais específicos (borboletas, corujas)</div>
+                   <div class="option" data-value="objetos">⭐ Objetos ou formas (estrelas, círculos)</div>
+                   <div class="option" data-value="nenhum">❓ Não tenho notado nada específico</div>
+               </div>
                
-               '.mega-pulse {' +
-                   'animation-duration: 3s;' +
-               '}' +
-           '}' +
-           
-           '/* Estados de hover mais agressivos para desktop */' +
-           '@media (hover: hover) {' +
-               '.option:hover {' +
-                   'transform: translateY(-4px) scale(1.02);' +
-               '}' +
+               <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
+                   CONTINUAR REVELAÇÃO
+               </a>
+           </div>
+
+           <!-- ETAPA 8: PERGUNTA 5 -->
+           <div class="step" id="step8">
+               <div class="progress-container">
+                   <div class="progress-bar" style="width: 90%;"></div>
+               </div>
                
-               '.cta-mega:hover {' +
-                   'transform: scale(1.1) !important;' +
-                   'animation-play-state: paused;' +
-               '}' +
-           '}' +
-           
-           '/* Melhor acessibilidade */' +
-           '@media (prefers-reduced-motion: reduce) {' +
-               '.cosmic-circle,' +
-               '.mega-pulse,' +
-               '.loading-dots,' +
-               '.urgent-blink {' +
-                   'animation: none;' +
-               '}' +
-               
-               '.option,' +
-               '.cta-mega {' +
-                   'transition: none;' +
-               '}' +
-           '}' +
-           
-           '/* Focus states melhorados */' +
-           '.option:focus,' +
-           '.cta-mega:focus,' +
-           'input:focus {' +
-               'outline: 3px solid var(--accent);' +
-               'outline-offset: 2px;' +
-           '}' +
-           
-           '/* Melhor contraste para acessibilidade */' +
-           '@media (prefers-contrast: high) {' +
-               '.option {' +
-                   'border-width: 3px;' +
-               '}' +
-               
-               '.cta-mega {' +
-                   'box-shadow: 0 0 0 3px var(--accent);' +
-               '}' +
-           '}' +
-           '</style>';
-       
-       document.head.insertAdjacentHTML('beforeend', additionalCSS);
-   </script>
+               <div class="question-title">Como você se sente em relação ao seu futuro próximo?</div>
+               <div class="option-group">
+                  <div class="option" data-value="otimista">🌟 Otimista, sinto que coisas boas vêm aí</div>
+                  <div class="option" data-value="nervoso">😰 Nervoso(a), muitas incertezas</div>
+                  <div class="option" data-value="curioso">🔮 Curioso(a) para saber o que me espera</div>
+                  <div class="option" data-value="preparado">💪 Preparado(a) para qualquer desafio</div>
+              </div>
+              
+              <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
+                  CONTINUAR REVELAÇÃO
+              </a>
+          </div>
+
+          <!-- ETAPA 9: PERGUNTA 6 -->
+          <div class="step" id="step9">
+              <div class="progress-container">
+                  <div class="progress-bar" style="width: 95%;"></div>
+              </div>
+              
+              <div class="question-title">Qual dessas frases ressoa mais com sua alma neste momento?</div>
+              
+              <div class="option-group">
+                  <div class="option" data-value="transformacao">"Estou pronto(a) para me transformar"</div>
+                  <div class="option" data-value="amor">"Mereço receber amor verdadeiro"</div>
+                  <div class="option" data-value="abundancia">"Estou aberto(a) para a abundância"</div>
+                  <div class="option" data-value="proposito">"Quero descobrir minha missão de vida"</div>
+              </div>
+              
+              <a href="#" class="cta-mega next-btn" style="opacity: 0.6; pointer-events: none;">
+                  CONTINUAR REVELAÇÃO
+              </a>
+          </div>
+
+          <!-- ETAPA 10: LOADING -->
+          <div class="step" id="step10">
+              <div class="progress-container">
+                  <div class="progress-bar" style="width: 100%;"></div>
+              </div>
+              
+              <div class="cosmic-loader">
+                  <div class="cosmic-circle"></div>
+                  
+                  <div class="loading-text" id="loading-message">
+                      🔮 Analisando suas respostas<span class="loading-dots"></span>
+                  </div>
+                  
+                  <p style="text-align: center; margin-top: 30px; color: var(--accent);">
+                      <strong>Preparando sua revelação personalizada...</strong>
+                  </p>
+              </div>
+          </div>
+
+          <!-- ETAPA 11: RESULTADO PERSONALIZADO - PÁGINA DE RESULTADOS -->
+          <div class="step" id="step11">
+              <div class="question-title" id="personalized-title">🔮 Sua Revelação Está Pronta!</div>
+              
+              <div class="social-proof" style="margin: 30px 0;">
+                  <h3 style="color: var(--accent); margin-bottom: 20px;" id="personal-message">
+                      ✨ Mensagem será inserida aqui
+                  </h3>
+                  <p style="font-size: 1.1rem; line-height: 1.6;" id="preview-reading">
+                      Conteúdo da prévia será inserido aqui...
+                  </p>
+              </div>
+              
+              <!-- URGÊNCIA FINAL -->
+              <div class="scarcity-bomb">
+                  <div class="scarcity-title">⚠ OFERTA ESPECIAL</div>
+                  <div class="countdown-display" id="countdown-final">05:00</div>
+                  <p><strong>Desconto expira em 5 minutos!</strong></p>
+              </div>
+              
+              <div class="pricing-section">
+                  <h3 style="color: var(--accent); margin-bottom: 20px;">💰 Revelação Completa</h3>
+                  
+                  <div class="price-comparison">
+                      <div>
+                          <div class="old-price">R$49,90</div>
+                          <small style="opacity: 0.7;">Valor normal</small>
+                      </div>
+                      <div style="text-align: center;">
+                          <div style="color: var(--danger); font-weight: 700; font-size: 1.3rem;">-80% OFF</div>
+                          <small>Apenas hoje</small>
+                      </div>
+                      <div>
+                          <div class="new-price">R$9,90</div>
+                          <small style="color: var(--success);">Oferta especial</small>
+                      </div>
+                  </div>
+                  
+                  <div class="guarantee">
+                      🛡 GARANTIA TOTAL: 100% do dinheiro de volta se não ficar satisfeito
+                  </div>
+                  
+                  <a href="https://pay.cakto.com.br/seu-link-aqui" class="cta-mega" id="payment-btn">
+                      🔮 LIBERAR REVELAÇÃO COMPLETA - R$9,90
+                  </a>
+                  
+                  <p style="text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
+                      🔒 Pagamento 100% seguro • Acesso imediato após confirmação
+                  </p>
+              </div>
+          </div>
+         
+          <!-- ETAPA 12: LEITURA FINAL -->
+          <div class="step" id="step12">
+              <div class="question-title">✨ Sua Leitura Personalizada</div>
+              
+              <div id="reading-content">
+                  <!-- Conteúdo será inserido aqui -->
+              </div>
+              
+              <div class="guarantee">
+                  🌟 Esperamos que esta leitura traga a clareza que sua alma buscava
+              </div>
+              
+              <a href="#" class="cta-mega" onclick="location.reload()">
+                  🔄 FAZER NOVA CONSULTA
+              </a>
+          </div>
+      </div>
+  </div>
+  
+  <!-- NOTIFICAÇÃO SOCIAL -->
+  <div class="social-notification" id="social-notification">
+      <p class="notification-text">
+          <span class="notification-name"></span>: 
+          <span class="notification-message"></span>
+      </p>
+      <p class="notification-time"></p>
+  </div>
+
+  <script>
+      // CONFIGURAÇÕES E VARIÁVEIS
+      const tarotCards = [
+          { id: 1, name: "O Louco", image: "https://www.trustedtarot.com/img/cards/the-fool.png" },
+          { id: 2, name: "O Mago", image: "https://www.trustedtarot.com/img/cards/the-magician.png" },
+          { id: 3, name: "A Sacerdotisa", image: "https://www.trustedtarot.com/img/cards/the-high-priestess.png" },
+          { id: 4, name: "A Imperatriz", image: "https://www.trustedtarot.com/img/cards/the-empress.png" },
+          { id: 5, name: "O Imperador", image: "https://www.trustedtarot.com/img/cards/the-emperor.png" },
+          { id: 6, name: "Os Enamorados", image: "https://www.trustedtarot.com/img/cards/the-lovers.png" },
+          { id: 7, name: "O Carro", image: "https://www.trustedtarot.com/img/cards/the-chariot.png" },
+          { id: 8, name: "A Força", image: "https://www.trustedtarot.com/img/cards/strength.png" }
+      ];
+      
+      let currentStep = 1;
+      let selectedCards = [];
+      let userData = {
+          problema: '',
+          area: '',
+          nome: '',
+          energia: '',
+          sonhos: '',
+          situacao: '',
+          simbolos: '',
+          futuro: '',
+          frase: ''
+      };
+      
+      // NOTIFICAÇÕES SOCIAIS
+      const socialMessages = [
+          "Chorei ao ler... muito preciso!",
+          "Incrível como acertou detalhes da minha vida!",
+          "Melhor investimento que fiz!",
+          "As cartas revelaram exatamente o que precisava saber!",
+          "Impressionante a precisão da leitura!",
+          "Mudou minha perspectiva sobre tudo!",
+          "Conseguiu ver coisas que nem eu sabia sobre mim!",
+          "Estou sem palavras... muito real!",
+          "A parte sobre amor foi certeira!",
+          "Finalmente entendi o que estava bloqueando minha vida!"
+      ];
+      
+      const customerNames = [
+          "Maria S.", "Carlos F.", "Ana L.", "João P.", "Juliana R.",
+          "Roberto M.", "Patricia N.", "Gustavo T.", "Fernanda C.", "André L.",
+          "Luiza M.", "Ricardo T.", "Camila D.", "Bruno S.", "Amanda P."
+      ];
+      
+      // TIMERS E CONTADORES
+      let spotsRemaining = 18;
+      let bannerMinutes = 11;
+      let bannerSeconds = 47;
+      let finalMinutes = 5;
+      let finalSeconds = 0;
+      
+      // SISTEMA DE URL E CONTROLE DE EVENTOS
+      function updateURL(hash) {
+          window.history.pushState(null, null, hash);
+      }
+      
+      function checkURL() {
+          const hash = window.location.hash;
+          if (hash === '#resultados' && currentStep === 11) {
+              // Dispara evento de Lead apenas uma vez quando chega na página de resultados
+              window.botProtection.trackEvent('Lead');
+          }
+      }
+      
+      // FUNÇÕES DE TIMER
+      function updateBannerTimer() {
+          if (bannerSeconds > 0) {
+              bannerSeconds--;
+          } else if (bannerMinutes > 0) {
+              bannerMinutes--;
+              bannerSeconds = 59;
+          }
+          
+          const timerElement = document.getElementById('timer-banner');
+          if (timerElement) {
+              timerElement.textContent = bannerMinutes + ':' + bannerSeconds.toString().padStart(2, '0');
+          }
+      }
+      
+      function updateFinalTimer() {
+          if (finalSeconds > 0) {
+              finalSeconds--;
+          } else if (finalMinutes > 0) {
+              finalMinutes--;
+              finalSeconds = 59;
+          }
+          
+          const timerElement = document.getElementById('countdown-final');
+          if (timerElement) {
+              timerElement.textContent = finalMinutes.toString().padStart(2, '0') + ':' + finalSeconds.toString().padStart(2, '0');
+              
+              // Efeito de urgência nos últimos 2 minutos
+              if (finalMinutes < 2) {
+                  timerElement.style.animation = 'urgent-blink 0.5s infinite alternate';
+                  timerElement.style.color = '#ff4757';
+              }
+          }
+      }
+      
+      function updateCountdowns() {
+          const mainCountdown = document.getElementById('countdown-main');
+          if (mainCountdown) {
+              mainCountdown.textContent = bannerMinutes + ':' + bannerSeconds.toString().padStart(2, '0');
+          }
+      }
+      
+      // ESCASSEZ DINÂMICA
+      function updateScarcity() {
+          if (spotsRemaining > 5) {
+              spotsRemaining = Math.max(spotsRemaining - Math.floor(Math.random() * 2), 5);
+              const spotsElement = document.getElementById('spots-remaining');
+              if (spotsElement) {
+                  spotsElement.textContent = spotsRemaining;
+              }
+          }
+      }
+      
+      // NOTIFICAÇÕES SOCIAIS
+      function showSocialNotification() {
+          const notification = document.getElementById('social-notification');
+          const nameElement = notification.querySelector('.notification-name');
+          const messageElement = notification.querySelector('.notification-message');
+          const timeElement = notification.querySelector('.notification-time');
+          
+          const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
+          const randomMessage = socialMessages[Math.floor(Math.random() * socialMessages.length)];
+          const randomMinutes = Math.floor(Math.random() * 45) + 1;
+          
+          nameElement.textContent = randomName;
+          messageElement.textContent = randomMessage;
+          timeElement.textContent = 'há ' + randomMinutes + ' minutos';
+          
+          notification.classList.add('show');
+          
+          setTimeout(() => {
+              notification.classList.remove('show');
+          }, 6000);
+      }
+      
+      // NAVEGAÇÃO ENTRE ETAPAS
+      function goToStep(step) {
+          document.getElementById('step' + currentStep).classList.remove('active');
+          currentStep = step;
+          document.getElementById('step' + currentStep).classList.add('active');
+          
+          // Scroll para o topo
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          
+          // Ações específicas por etapa
+          if (step === 10) {
+              startLoadingSequence();
+          } else if (step === 11) {
+              // Página de resultados - atualiza URL
+              updateURL('#resultados');
+              generatePersonalizedPreview();
+              startFinalCountdown();
+              setTimeout(() => {
+                  showSocialNotification();
+                  setInterval(showSocialNotification, 15000);
+              }, 3000);
+              // Verifica URL para disparar evento
+              setTimeout(checkURL, 500);
+          }
+      }
+      
+      // SISTEMA DE CARTAS
+      function shuffleArray(array) {
+          const shuffled = [...array];
+          for (let i = shuffled.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+          return shuffled;
+      }
+      
+      // SEQUÊNCIA DE CARREGAMENTO
+      function startLoadingSequence() {
+          const messages = [
+              '🔮 Analisando suas respostas',
+              '⭐ Consultando os registros akáshicos',
+              '🌟 Decodificando padrões energéticos',
+              '✨ Revelando segredos do seu destino',
+              '🎯 Preparando sua leitura personalizada'
+          ];
+          
+          let messageIndex = 0;
+          const messageElement = document.getElementById('loading-message');
+          
+          const messageInterval = setInterval(() => {
+              messageIndex++;
+              if (messageIndex < messages.length) {
+                  messageElement.innerHTML = messages[messageIndex] + '<span class="loading-dots"></span>';
+              } else {
+                  clearInterval(messageInterval);
+                  setTimeout(() => {
+                      goToStep(11);
+                  }, 2000);
+              }
+          }, 1500);
+      }
+      
+      // TIMER FINAL
+      function startFinalCountdown() {
+          setInterval(updateFinalTimer, 1000);
+      }
+      
+      // GERAÇÃO DE LEITURA
+      function generateReading() {
+          const userName = userData.nome || 'Consulente';
+          
+          const readings = {
+              amor: {
+                  title: '💕 Revelações do Seu Coração',
+                  content: 
+                      '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
+                      '<p>As cartas revelam que você está passando por uma transformação profunda em sua vida amorosa. Sua alma gêmea está mais próxima do que imagina - uma conexão especial surgirá nos próximos 60 dias.</p>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">🌟 Sua Primeira Carta - O Passado</h4>' +
+                          '<p>Existe uma energia do passado que ainda ressoa em seu coração. Não é necessariamente uma pessoa, mas um padrão emocional que você precisa liberar para atrair o amor verdadeiro.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">💫 Sua Segunda Carta - O Presente</h4>' +
+                          '<p>Alguém muito especial já está observando você de longe. Esta pessoa admira sua energia e autenticidade. Se você está solteiro(a), prepare-se para uma surpresa romântica.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">🔮 Sua Terceira Carta - O Futuro</h4>' +
+                          '<p>Um relacionamento baseado em amor verdadeiro e respeito mútuo está se formando. As cartas mostram uma conexão que durará anos e trará a felicidade que você sempre sonhou.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
+                          '<h4 style="color: white; margin-bottom: 15px;">🎯 Orientação Especial</h4>' +
+                          '<p style="color: white; margin: 0;">Para atrair o amor verdadeiro, pratique gratidão diariamente e visualize-se recebendo o amor que merece. O universo está conspirando a seu favor!</p>' +
+                      '</div>'
+              },
+              dinheiro: {
+                  title: '💰 Revelações da Sua Prosperidade',
+                  content: 
+                      '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
+                      '<p>As cartas mostram um período de grande transformação financeira se aproximando. Uma oportunidade de ouro surgirá nos próximos 90 dias que mudará sua situação completamente.</p>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">⚡ Sua Primeira Carta - Talentos Ocultos</h4>' +
+                          '<p>Você possui um dom natural que está sendo completamente subutilizado. Este talento está relacionado à comunicação ou criatividade e pode se tornar uma fonte importante de renda.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">🌊 Sua Segunda Carta - Fluxo Financeiro</h4>' +
+                          '<p>Uma nova fonte de renda está se abrindo, possivelmente relacionada a algo que você considera "apenas um hobby". As cartas mostram prosperidade através da paixão.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">👑 Sua Terceira Carta - Reconhecimento</h4>' +
+                          '<p>Nos próximos 6 meses, você receberá uma proposta ou reconhecimento que validará suas habilidades de forma surpreendente. Sua hora de brilhar chegou!</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
+                          '<h4 style="color: white; margin-bottom: 15px;">🎯 Ritual de Prosperidade</h4>' +
+                          '<p style="color: white; margin: 0;">Escreva suas qualidades profissionais em um papel e leia em voz alta todas as manhãs por 21 dias. Este ritual abrirá portais de abundância!</p>' +
+                      '</div>'
+              },
+              proposito: {
+                  title: '🌟 Revelações do Seu Propósito',
+                  content: 
+                      '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
+                      '<p>As cartas revelam que você está passando por um despertar espiritual acelerado. Sua missão de vida está se tornando mais clara e você será chamado(a) para ajudar outras pessoas.</p>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">🔮 Sua Primeira Carta - Conexões Superiores</h4>' +
+                          '<p>Você possui uma conexão natural com planos superiores que vem se intensificando. Seus guias espirituais tentam se comunicar através de números repetidos e "coincidências".</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">✨ Sua Segunda Carta - Dons Latentes</h4>' +
+                          '<p>As cartas revelam habilidades intuitivas extraordinárias que foram reprimidas na infância. Estes dons estão despertando agora porque chegou sua hora de usá-los.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">🌈 Sua Terceira Carta - Missão Revelada</h4>' +
+                          '<p>Sua missão é ser um catalisador de cura emocional para outras pessoas. Nos próximos meses, pessoas começarão a procurá-lo naturalmente para conselhos e orientação.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
+                          '<h4 style="color: white; margin-bottom: 15px;">🎯 Prática Espiritual</h4>' +
+                          '<p style="color: white; margin: 0;">Dedique 15 minutos diários à meditação silenciosa. Em 30 dias, padrões proféticos se revelarão, confirmando sua conexão especial com o divino.</p>' +
+                      '</div>'
+              },
+              futuro: {
+                  title: '🔮 Visões do Seu Destino',
+                  content: 
+                      '<h3 style="color: var(--accent); margin: 20px 0;">Querido(a) ' + userName + ',</h3>' +
+                      '<p>As cartas abrem um portal temporal revelando eventos extraordinários que se aproximam. Seu futuro está repleto de oportunidades e transformações positivas.</p>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">⏰ Próximos 3 Meses</h4>' +
+                          '<p>Uma oportunidade inesperada chegará através de uma pessoa do seu passado ou alguém com características similares. Esta oportunidade mudará sua trajetória de vida.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">🌟 Próximos 6 Meses</h4>' +
+                          '<p>Um período de reconhecimento e colheita dos esforços que você vem plantando. Algo que começou como "teste" se tornará uma fonte de realização e prosperidade.</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: rgba(30, 10, 41, 0.5); padding: 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid var(--accent);">' +
+                          '<h4 style="color: var(--accent);">🦋 Próximo Ano</h4>' +
+                          '<p>Uma transformação completa na sua identidade está programada. Você se tornará uma versão mais autêntica e poderosa de si mesmo(a). Um novo ciclo de vida começa!</p>' +
+                      '</div>' +
+                      
+                      '<div style="background: var(--gradient); padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">' +
+                          '<h4 style="color: white; margin-bottom: 15px;">🎯 Preparação para o Destino</h4>' +
+                          '<p style="color: white; margin: 0;">Mantenha um diário de manifestações: anote diariamente 3 desejos e 3 gratidões. Revise mensalmente - você ficará impressionado(a) com os resultados!</p>' +
+                      '</div>'
+              }
+          };
+          const selectedReading = readings[userData.area] || readings.futuro;
+          
+          // Adicionar as cartas selecionadas simuladas
+          let cardsHtml = '<div style="display: flex; justify-content: center; gap: 15px; margin: 30px 0; flex-wrap: wrap;">';
+          const randomCards = shuffleArray(tarotCards).slice(0, 3);
+          randomCards.forEach((card, index) => {
+              cardsHtml += 
+                  '<div style="text-align: center;">' +
+                      '<img src="' + card.image + '" alt="' + card.name + '" style="width: 100px; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);">' +
+                      '<p style="margin-top: 10px; font-weight: bold; color: var(--accent); font-size: 0.9rem;">' + card.name + '</p>' +
+                  '</div>';
+          });
+          cardsHtml += '</div>';
+          
+          document.getElementById('reading-content').innerHTML = cardsHtml + selectedReading.content;
+      }
+
+      // GERAÇÃO DE PRÉVIA PERSONALIZADA
+      function generatePersonalizedPreview() {
+          const userName = userData.nome || 'Querido(a)';
+          
+          // Título personalizado
+          document.getElementById('personalized-title').textContent = 
+              `🔮 ${userName}, Sua Revelação Está Pronta!`;
+          
+          // Mensagem personalizada baseada nas respostas
+          let personalMessage = `${userName}, baseado em suas respostas, o Universo revelou algo extraordinário sobre seu destino...`;
+          
+          if (userData.energia === 'esperancosa') {
+              personalMessage += " Sua energia positiva está atraindo oportunidades incríveis!";
+          } else if (userData.energia === 'pesada') {
+              personalMessage += " Descobrimos o que está bloqueando sua energia e como liberar!";
+          } else if (userData.energia === 'confusa') {
+              personalMessage += " A clareza que você busca está finalmente chegando!";
+          } else if (userData.energia === 'ansiosa') {
+              personalMessage += " As mudanças que você pressente realmente estão se aproximando!";
+          }
+          
+          document.getElementById('personal-message').textContent = personalMessage;
+          
+          // Prévia da leitura
+          let preview = `As cartas revelaram 3 segredos importantes sobre sua vida:\n\n`;
+          preview += `📖 Para acessar a revelação completa com todos os detalhes, rituais específicos e datas exatas, clique abaixo:`;
+          
+          document.getElementById('preview-reading').innerHTML = preview.replace(/\n/g, '<br>');
+      }
+      
+      // EVENT LISTENERS
+      document.addEventListener('DOMContentLoaded', function() {
+          // Verificar se chegou direto na página de resultados via URL
+          if (window.location.hash === '#resultados') {
+              // Se chegou direto, redirecionar para o início
+              window.location.hash = '';
+              location.reload();
+          }
+          
+          // Seleção de opções
+          document.addEventListener('click', function(e) {
+              if (e.target.classList.contains('option')) {
+                  const parent = e.target.parentElement;
+                  parent.querySelectorAll('.option').forEach(opt => {
+                      opt.classList.remove('selected');
+                  });
+                  
+                  e.target.classList.add('selected');
+                  
+                  const value = e.target.getAttribute('data-value');
+                  if (currentStep === 1) {
+                      userData.problema = value;
+                      const nextBtn = document.querySelector('#step1 .next-btn');
+                      nextBtn.style.opacity = '1';
+                      nextBtn.style.pointerEvents = 'auto';
+                  } else if (currentStep === 2) {
+                      userData.area = value;
+                  } else if (currentStep === 4) {
+                      userData.energia = value;
+                  } else if (currentStep === 5) {
+                      userData.sonhos = value;
+                  } else if (currentStep === 6) {
+                      userData.situacao = value;
+                  } else if (currentStep === 7) {
+                      userData.simbolos = value;
+                  } else if (currentStep === 8) {
+                      userData.futuro = value;
+                  } else if (currentStep === 9) {
+                      userData.frase = value;
+                  }
+
+                  // Ativar botão após seleção (exceto step 1 que já tem lógica própria)
+                  if (currentStep > 1) {
+                      const nextBtn = document.querySelector('#step' + currentStep + ' .next-btn');
+                      if (nextBtn) {
+                          nextBtn.style.opacity = '1';
+                          nextBtn.style.pointerEvents = 'auto';
+                      }
+                  }
+              }
+          });
+          
+          // Botões de próximo
+          document.addEventListener('click', function(e) {
+              if (e.target.classList.contains('next-btn')) {
+                  e.preventDefault();
+                  
+                  if (currentStep === 1 && !userData.problema) {
+                      alert('Por favor, escolha uma opção para continuar.');
+                      return;
+                  }
+                  
+                  if (currentStep === 2 && !userData.area) {
+                      alert('Por favor, escolha uma área para continuar.');
+                      return;
+                  }
+                  
+                  if (currentStep === 3) {
+                      const nameInput = document.getElementById('user-name');
+                      if (!nameInput.value.trim()) {
+                          alert('Por favor, digite seu nome para continuar.');
+                          nameInput.focus();
+                          return;
+                      }
+                      userData.nome = nameInput.value.trim();
+                  }
+
+                  if (currentStep === 4 && !userData.energia) {
+                      alert('Por favor, escolha uma opção para continuar.');
+                      return;
+                  }
+
+                  if (currentStep === 5 && !userData.sonhos) {
+                      alert('Por favor, escolha uma opção para continuar.');
+                      return;
+                  }
+
+                  if (currentStep === 6 && !userData.situacao) {
+                      alert('Por favor, escolha uma opção para continuar.');
+                      return;
+                  }
+
+                  if (currentStep === 7 && !userData.simbolos) {
+                      alert('Por favor, escolha uma opção para continuar.');
+                      return;
+                  }
+
+                  if (currentStep === 8 && !userData.futuro) {
+                      alert('Por favor, escolha uma opção para continuar.');
+                      return;
+                  }
+
+                  if (currentStep === 9 && !userData.frase) {
+                      alert('Por favor, escolha uma opção para continuar.');
+                      return;
+                  }
+                  
+                  goToStep(currentStep + 1);
+              }
+          });
+          
+          // Botão de pagamento - evento InitiateCheckout
+          document.addEventListener('click', function(e) {
+              if (e.target.id === 'payment-btn') {
+                  e.preventDefault();
+                  
+                  // Tracking de finalização de compra - só dispara uma vez
+                  window.botProtection.trackEvent('InitiateCheckout', {
+                      content_name: 'Leitura Premium de Tarot',
+                      value: 9.90,
+                      currency: 'BRL'
+                  });
+                  
+                  // Salvar dados do usuário no sessionStorage (não localStorage para evitar persistência excessiva)
+                  localStorage.setItem('tarotUserData', JSON.stringify(userData));
+                  
+                  // Redirecionar para o link de pagamento
+                  // SUBSTITUA pela sua URL de pagamento real:
+                  window.location.href = 'https://pay.cakto.com.br/seu-link-aqui';
+              }
+          });
+          
+          // Input de nome - Enter para continuar
+          document.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter' && e.target.id === 'user-name') {
+                  const nextBtn = document.querySelector('#step3 .next-btn');
+                  if (nextBtn) {
+                      nextBtn.click();
+                  }
+              }
+          });
+          
+          // Verificar se voltou do pagamento com sucesso
+          const urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.get('success') === 'true') {
+             const savedData = localStorage.getItem('tarotUserData');
+              if (savedData) {
+                  userData = JSON.parse(savedData);
+                  generateReading();
+                  goToStep(12);
+                  
+                  // Evento de Purchase - só dispara uma vez
+                  window.botProtection.trackEvent('Purchase', {
+                      content_name: 'Leitura Premium de Tarot',
+                      value: 9.90,
+                      currency: 'BRL'
+                  });
+              }
+          }
+          
+          // Listener para mudanças na URL
+          window.addEventListener('hashchange', checkURL);
+          
+          // Iniciar timers
+          setInterval(updateBannerTimer, 1000);
+          setInterval(updateCountdowns, 1000);
+          setInterval(updateScarcity, 45000);
+          
+          // Mostrar primeira notificação social após 10 segundos
+          setTimeout(showSocialNotification, 10000);
+          
+          console.log('🔮 Site Tarot Ultra-Otimizado carregado com sucesso!');
+          console.log('🛡️ Proteção anti-bot ativa:', window.botProtection.isBot ? 'Bot detectado' : 'Usuário real');
+      });
+      
+      // Proteção adicional contra bots - monitoramento de comportamento
+      window.addEventListener('load', function() {
+          let clickCount = 0;
+          let rapidClicks = 0;
+          let lastClickTime = 0;
+          
+          document.addEventListener('click', function(e) {
+              const now = Date.now();
+              clickCount++;
+              
+              // Detecta cliques muito rápidos (menos de 50ms entre cliques)
+              if (now - lastClickTime < 50) {
+                  rapidClicks++;
+                  if (rapidClicks > 5) {
+                      window.botProtection.isBot = true;
+                      console.log('🚫 Bot detectado por cliques rápidos');
+                  }
+              }
+              
+              lastClickTime = now;
+          });
+          
+          // Detecta movimento do mouse (bots geralmente não têm)
+          let mouseMovements = 0;
+          document.addEventListener('mousemove', function() {
+              mouseMovements++;
+          });
+          
+          // Verifica após 10 segundos se houve movimento de mouse
+          setTimeout(function() {
+              if (mouseMovements < 5) {
+                  window.botProtection.isBot = true;
+                  console.log('🚫 Bot detectado por falta de movimento do mouse');
+              }
+          }, 10000);
+      });
+      
+      // CSS adicional para animação shake e melhorias
+      const additionalCSS = 
+          '<style>' +
+          '@keyframes shake {' +
+              '0%, 100% { transform: translateX(0); }' +
+              '10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }' +
+              '20%, 40%, 60%, 80% { transform: translateX(5px); }' +
+          '}' +
+          
+          '.tarot-card {' +
+              'transform-origin: center;' +
+              'will-change: transform;' +
+          '}' +
+          
+          '.loading-dots::after {' +
+              'animation: loading-dots 1.5s infinite;' +
+          '}' +
+          
+          '@keyframes loading-dots {' +
+              '0% { content: ""; }' +
+              '25% { content: "."; }' +
+              '50% { content: ".."; }' +
+              '75% { content: "..."; }' +
+              '100% { content: ""; }' +
+          '}' +
+          
+          '/* Melhorias de performance */' +
+          '.cosmic-circle {' +
+              'transform: translateZ(0);' +
+              'will-change: transform;' +
+          '}' +
+          
+          '.cta-mega {' +
+              'transform: translateZ(0);' +
+              'will-change: transform, box-shadow;' +
+          '}' +
+          
+          '/* Animações mais suaves */' +
+          '.step {' +
+              'will-change: opacity, transform;' +
+          '}' +
+          
+          '.option {' +
+              'will-change: transform, background-color;' +
+          '}' +
+          
+          '/* Melhor responsividade para tablets */' +
+          '@media (max-width: 1024px) and (min-width: 769px) {' +
+              '.cta-mega {' +
+                  'font-size: 1.3rem;' +
+              '}' +
+              
+              '.new-price {' +
+                  'font-size: 2.8rem;' +
+              '}' +
+          '}' +
+          
+          '/* Otimizações para dispositivos com pouca RAM */' +
+          '@media (max-device-width: 768px) and (-webkit-max-device-pixel-ratio: 2) {' +
+              '.cosmic-circle {' +
+                  'animation-duration: 3s;' +
+              '}' +
+              
+              '.mega-pulse {' +
+                  'animation-duration: 3s;' +
+              '}' +
+          '}' +
+          
+          '/* Estados de hover mais agressivos para desktop */' +
+          '@media (hover: hover) {' +
+              '.option:hover {' +
+                  'transform: translateY(-4px) scale(1.02);' +
+              '}' +
+              
+              '.cta-mega:hover {' +
+                  'transform: scale(1.1) !important;' +
+                  'animation-play-state: paused;' +
+              '}' +
+          '}' +
+          
+          '/* Melhor acessibilidade */' +
+          '@media (prefers-reduced-motion: reduce) {' +
+              '.cosmic-circle,' +
+              '.mega-pulse,' +
+              '.loading-dots,' +
+              '.urgent-blink {' +
+                  'animation: none;' +
+              '}' +
+              
+              '.option,' +
+              '.cta-mega {' +
+                  'transition: none;' +
+              '}' +
+          '}' +
+          
+          '/* Focus states melhorados */' +
+          '.option:focus,' +
+          '.cta-mega:focus,' +
+          'input:focus {' +
+              'outline: 3px solid var(--accent);' +
+              'outline-offset: 2px;' +
+          '}' +
+          
+          '/* Melhor contraste para acessibilidade */' +
+          '@media (prefers-contrast: high) {' +
+              '.option {' +
+                  'border-width: 3px;' +
+              '}' +
+              
+              '.cta-mega {' +
+                  'box-shadow: 0 0 0 3px var(--accent);' +
+              '}' +
+          '}' +
+          
+          '/* Proteção contra seleção de texto em elementos importantes */' +
+          '.cta-mega, .option, .cosmic-circle {' +
+              'user-select: none;' +
+              '-webkit-user-select: none;' +
+              '-moz-user-select: none;' +
+              '-ms-user-select: none;' +
+          '}' +
+          
+          '/* Melhorias visuais para a página de resultados */' +
+          '#step11 {' +
+              'animation: fadeInUp 1s ease-out;' +
+          '}' +
+          
+          '#step11 .pricing-section {' +
+              'animation: price-highlight 3s ease-in-out infinite alternate;' +
+          '}' +
+          
+          '@keyframes price-highlight {' +
+              '0% { box-shadow: 0 0 20px rgba(255, 157, 0, 0.3); }' +
+              '100% { box-shadow: 0 0 40px rgba(255, 157, 0, 0.7); }' +
+          '}' +
+          '</style>';
+      
+      document.head.insertAdjacentHTML('beforeend', additionalCSS);
+      
+      // Proteção adicional - desabilita ferramentas de desenvolvedor em produção
+      if (!window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1')) {
+          // Detecta abertura do DevTools
+          let devtools = {
+              open: false,
+              orientation: null
+          };
+          
+          setInterval(function() {
+              if (window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200) {
+                  if (!devtools.open) {
+                      devtools.open = true;
+                      window.botProtection.isBot = true;
+                      console.log('🚫 Ferramentas de desenvolvedor detectadas');
+                  }
+              } else {
+                  devtools.open = false;
+              }
+          }, 500);
+          
+          // Desabilita clique direito
+          document.addEventListener('contextmenu', function(e) {
+              e.preventDefault();
+          });
+          
+          // Desabilita teclas de atalho comuns
+          document.addEventListener('keydown', function(e) {
+              // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+              if (e.keyCode === 123 || 
+                  (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+                  (e.ctrlKey && e.keyCode === 85)) {
+                  e.preventDefault();
+                  return false;
+              }
+          });
+      }
+  </script>
 </body>
 </html>
