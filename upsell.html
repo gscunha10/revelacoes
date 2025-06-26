@@ -44,6 +44,48 @@
             --danger: #ff4757;
             --success: #2ed573;
         }
+        /* Estilos dos botões Cakto */
+cakto-upsell-accept::part(button) {
+    background: linear-gradient(45deg, #2ed573, #7bed9f) !important;
+    color: white !important;
+    padding: 25px 40px !important;
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    border-radius: 50px !important;
+    border: none !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    margin: 15px auto !important;
+    cursor: pointer !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4) !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+cakto-upsell-accept::part(button):hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 40px rgba(46, 213, 115, 0.6) !important;
+}
+
+cakto-upsell-reject::part(button) {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    padding: 15px 30px !important;
+    font-size: 1rem !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 25px !important;
+    margin: 10px auto !important;
+    cursor: pointer !important;
+    text-decoration: underline !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+cakto-upsell-reject::part(button):hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
         
         * {
             margin: 0;
@@ -389,44 +431,55 @@
             margin: 50px 0;
         }
         
-        /* Estilos dos botões Cakto */
-        cakto-upsell-accept::part(button) {
-            background: linear-gradient(45deg, var(--success), #7bed9f) !important;
-            color: white !important;
-            padding: 25px 40px !important;
-            font-size: 1.4rem !important;
-            font-weight: 700 !important;
-            border-radius: 50px !important;
-            border: none !important;
-            width: 100% !important;
-            max-width: 500px !important;
-            margin: 15px 0 !important;
-            cursor: pointer !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4) !important;
-            transition: all 0.3s ease !important;
+        /* Botões customizados que funcionam 100% */
+        .btn-accept {
+            display: block;
+            background: linear-gradient(45deg, #2ed573, #7bed9f);
+            color: white;
+            padding: 25px 40px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            width: 100%;
+            max-width: 500px;
+            margin: 15px auto;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(46, 213, 115, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
         }
         
-        cakto-upsell-accept::part(button):hover {
-            transform: translateY(-3px) !important;
-            box-shadow: 0 15px 40px rgba(46, 213, 115, 0.6) !important;
+        .btn-accept:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(46, 213, 115, 0.6);
+            background: linear-gradient(45deg, #7bed9f, #2ed573);
         }
         
-        cakto-upsell-reject::part(button) {
-            background: transparent !important;
-            color: rgba(255, 255, 255, 0.6) !important;
-            padding: 15px 30px !important;
-            font-size: 1rem !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            border-radius: 25px !important;
-            margin: 10px 0 !important;
-            cursor: pointer !important;
-            text-decoration: underline !important;
+        .btn-reject {
+            display: block;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            margin: 10px auto;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            max-width: 350px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
         }
         
-        cakto-upsell-reject::part(button):hover {
-            color: rgba(255, 255, 255, 0.8) !important;
+        .btn-reject:hover {
+            color: rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 255, 255, 0.5);
         }
         
         @media (max-width: 768px) {
@@ -458,6 +511,11 @@
             
             .countdown-display {
                 font-size: 2.2rem;
+            }
+            
+            .btn-accept {
+                font-size: 1.2rem;
+                padding: 20px 30px;
             }
         }
     </style>
@@ -602,50 +660,48 @@
             </div>
             
             <!-- CTA BUTTONS -->
-            <div class="cta-section">
-                <h3 style="color: var(--accent); margin-bottom: 30px; font-size: 1.8rem;">
-                    🚨 Esta é Sua ÚLTIMA CHANCE de Garantir Este Preço!
-                </h3>
-                
-                <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--light);">
-                    As cartas mostraram seu potencial...<br>
-                    Agora <strong style="color: var(--accent);">DESBLOQUEIE</strong> ele completamente!
-                </p>
-                
-               <div>
-    <meta charset="UTF-8">
-    <cakto-upsell-buttons>
-        <cakto-upsell-accept
-            bg-color="#0f7865"
-            text-color="#ffffff"
-            upsell-accept-url="https://www.revelacoes.online/Obrigado.html"
-            offer-id="nedqpnk"
-            app-base-url="https://app.cakto.com.br"
-            offer-type="upsell"
-            upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
-            target="_self"
-        >
-            🧠 SIM! QUERO REPROGRAMAR MINHA MENTE - R$19,90
-        </cakto-upsell-accept>
-        <cakto-upsell-reject
-            upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
-            target="_self"
-        >
-            Não, quero continuar com as mesmas limitações
-        </cakto-upsell-reject>
-    </cakto-upsell-buttons>
+            <!-- CTA BUTTONS -->
+<div class="cta-section">
+    <h3 style="color: var(--accent); margin-bottom: 30px; font-size: 1.8rem;">
+        🚨 Esta é Sua ÚLTIMA CHANCE de Garantir Este Preço!
+    </h3>
+    
+    <p style="font-size: 1.2rem; margin-bottom: 30px; color: var(--light);">
+        As cartas mostraram seu potencial...<br>
+        Agora <strong style="color: var(--accent);">DESBLOQUEIE</strong> ele completamente!
+    </p>
+    
+    <!-- BOTÕES CAKTO ORIGINAIS -->
+    <div>
+        <meta charset="UTF-8">
+        <cakto-upsell-buttons>
+            <cakto-upsell-accept
+                bg-color="#2ed573"
+                text-color="#ffffff"
+                upsell-accept-url="https://www.revelacoes.online/Obrigado.html"
+                offer-id="nedqpnk"
+                app-base-url="https://app.cakto.com.br"
+                offer-type="upsell"
+                upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
+            >
+                🧠 SIM! QUERO REPROGRAMAR MINHA MENTE - R$19,90
+            </cakto-upsell-accept>
+            <cakto-upsell-reject
+                upsell-reject-url="https://www.revelacoes.online/Obrigado.html"
+            >
+                Não, quero continuar com as mesmas limitações
+            </cakto-upsell-reject>
+        </cakto-upsell-buttons>
+    </div>
+    
+    <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.8;">
+        🔒 Pagamento 100% seguro • Acesso imediato após confirmação
+    </p>
 </div>
-                
-                <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.8;">
-                    🔒 Pagamento 100% seguro • Acesso imediato após confirmação
-                </p>
-            </div>
             
         </div>
     </div>
 
-    <script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
-    
     <script>
         // Timer da página
         let minutes = 14;
@@ -683,6 +739,16 @@
         // Atualizar timer a cada segundo
         setInterval(updateTimer, 1000);
         
+        // Adicionar animação de urgência no CSS
+        const urgentStyle = document.createElement('style');
+        urgentStyle.textContent = `
+            @keyframes urgent-blink {
+                0% { opacity: 0.7; }
+                100% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(urgentStyle);
+        
         // Tracking de eventos
         document.addEventListener('DOMContentLoaded', function() {
             // Track page view
@@ -697,28 +763,6 @@
             console.log('🧠 Página de upsell carregada com sucesso!');
         });
     </script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Aguardar o carregamento dos componentes Cakto
-    setTimeout(function() {
-        const acceptButton = document.querySelector('cakto-upsell-accept');
-        const rejectButton = document.querySelector('cakto-upsell-reject');
-        
-        if (acceptButton) {
-            acceptButton.addEventListener('click', function(e) {
-                // Garantir que não abre popup
-                e.preventDefault();
-                window.location.href = this.getAttribute('upsell-accept-url') || 'https://www.revelacoes.online/Obrigado.html';
-            });
-        }
-        
-        if (rejectButton) {
-            rejectButton.addEventListener('click', function(e) {
-                // Garantir que não abre popup
-                e.preventDefault();
-                window.location.href = this.getAttribute('upsell-reject-url') || 'https://www.revelacoes.online/Obrigado.html';
-            });
-        }
-    }, 1000);
-});
+    <script type="text/javascript" src="https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js"></script>
 </body>
 </html>
